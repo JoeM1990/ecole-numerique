@@ -1,1 +1,131 @@
-<p>gestion-enseignant works!</p>
+<div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item sidebar-category">
+          <p>Acceuil</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="mdi mdi-view-quilt menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+            <div class="badge badge-info badge-pill">2</div>
+          </a>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p>Services</p>
+          <span></span>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" data-toggle="collapse" href="#enseignant" aria-expanded="false" aria-controls="enseignant">
+            <i class="mdi mdi-palette menu-icon"></i>
+            <span class="menu-title">Gestion Enseignant</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="enseignant">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-enseignant">Home</a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-enseignant/presence">Presence</a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-enseignant/finance">Finance</a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-enseignant/paye">Paye</a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-enseignant/impression">Impression</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#eleves" aria-expanded="false" aria-controls="#eleves">
+              <i class="mdi mdi-palette menu-icon"></i>
+              <span class="menu-title">Gestion Eleves</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="eleves">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-eleves">Home</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Presence</a></li> -->
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-eleves/finance">Finance</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Paye</a></li> -->
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-eleves/impression">Impression</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ouv" aria-expanded="false" aria-controls="ouv">
+              <i class="mdi mdi-palette menu-icon"></i>
+              <span class="menu-title">Gestion Ouvrier</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ouv">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-ouvrier">Home</a></li>
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-ouvrier/presence">Presence</a></li>
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-ouvrier/finance">Finance</a></li>
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-ouvrier/paye">Paye</a></li>
+                <li class="nav-item"> <a class="nav-link" routerLink="/dashboard/gestion-ouvrier/impression">Impression</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="setting">
+              <i class="mdi mdi-palette menu-icon"></i>
+              <span class="menu-title">Parametre</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="setting">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Home</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <!-- <div class="navbar-brand-wrapper">
+            <a class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo"/></a>
+          </div> -->
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, Joe MONKILA</h4>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item">
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4>
+            </li>
+            
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+        
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          
+          
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+        <footer class="footer">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Distributed By: <a href="https://www.themewagon.com/" target="_blank">ThemeWagon</a></span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
