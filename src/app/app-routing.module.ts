@@ -14,6 +14,7 @@ import { PresenceOuvrierComponent } from './presentation/dashboard/pages/gestion
 import { PayeOuvrierComponent } from './presentation/dashboard/pages/gestion-ouvrier/paye-ouvrier/paye-ouvrier.component';
 import { FinanceOuvrierComponent } from './presentation/dashboard/pages/gestion-ouvrier/finance-ouvrier/finance-ouvrier.component';
 import { ImpressionOuvrierComponent } from './presentation/dashboard/pages/gestion-ouvrier/impression-ouvrier/impression-ouvrier.component';
+import { ParametreComponent } from './presentation/dashboard/pages/parametre/parametre.component';
 
 const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo: 'dashboard'},
@@ -31,6 +32,8 @@ const routes: Routes = [
   {path:'dashboard/gestion-ouvrier/paye', component:PayeOuvrierComponent},
   {path:'dashboard/gestion-ouvrier/finance', component:FinanceOuvrierComponent},
   {path:'dashboard/gestion-ouvrier/impression', component:ImpressionOuvrierComponent},
+  {path:'dashboard/parametre', component:ParametreComponent},
+  
   
 ];
 

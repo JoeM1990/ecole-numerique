@@ -18,6 +18,7 @@ import { FinanceOuvrierComponent } from './presentation/dashboard/pages/gestion-
 import { PayeOuvrierComponent } from './presentation/dashboard/pages/gestion-ouvrier/paye-ouvrier/paye-ouvrier.component';
 import { ImpressionOuvrierComponent } from './presentation/dashboard/pages/gestion-ouvrier/impression-ouvrier/impression-ouvrier.component';
 import { ParametreComponent } from './presentation/dashboard/pages/parametre/parametre.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ParametreComponent } from './presentation/dashboard/pages/parametre/par
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
