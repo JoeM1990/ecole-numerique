@@ -3,13 +3,11 @@ import { UseCase } from '../../base/use-case';
 import { UserModel } from '../models/user.model';
 import { UserRepository } from '../repositories/user.repository';
 
-export class UserLoginUseCase implements UseCase<{ username: string; password: string }, UserModel> {
+export class GetUserProfileUseCase implements UseCase<void, UserModel> {
 
     constructor(private userRepository: UserRepository) { }
 
-    execute(
-       params: { username: string, password: string },
-    ): Observable<UserModel> {
-        return this.userRepository.login(params);
+    execute(): Observable<UserModel> {
+        return this.userRepository.getUserProfile();
     }
 }
