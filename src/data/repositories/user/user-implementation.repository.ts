@@ -20,12 +20,12 @@ export class UserImplementationRepository extends UserRepository {
 
     login(params: {username: string, password: string}): Observable<UserModel> {
         return this.http
-            .post<UserEntity>('https://example.com/login', {params})
+            .post<UserEntity>('https://api-ecole.monkila-tech.com/login', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
     register(params: {username: string, password: string}): Observable<UserModel> {
        return this.http
-            .post<UserEntity>('https://example.com/register', {params})
+            .post<UserEntity>('https://api-ecole.monkila-tech.com/register', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
     getUserProfile(): Observable<UserModel>{
