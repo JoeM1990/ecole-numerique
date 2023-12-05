@@ -23,11 +23,13 @@ export class UserImplementationRepository extends UserRepository {
             .post<UserEntity>('https://api-ecole.monkila-tech.com/login', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
+
     register(params: {username: string, password: string}): Observable<UserModel> {
        return this.http
             .post<UserEntity>('https://api-ecole.monkila-tech.com/register', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
+    
     getUserProfile(): Observable<UserModel>{
         return this.http.get<UserEntity>('https://example.com/user').pipe(
             map(this.userMapper.mapFrom));
