@@ -15,6 +15,8 @@ import { PayeOuvrierComponent } from './dashboard/pages/gestion-ouvrier/paye-ouv
 import { FinanceOuvrierComponent } from './dashboard/pages/gestion-ouvrier/finance-ouvrier/finance-ouvrier.component';
 import { ImpressionOuvrierComponent } from './dashboard/pages/gestion-ouvrier/impression-ouvrier/impression-ouvrier.component';
 import { ParametreComponent } from './dashboard/pages/parametre/parametre.component';
+import { LoginComponent } from './auth-ui/login/login.component';
+import { RegisterComponent } from './auth-ui/register/register.component';
 
 const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo: 'dashboard'},
@@ -33,6 +35,8 @@ const routes: Routes = [
   {path:'dashboard/gestion-ouvrier/finance', component:FinanceOuvrierComponent},
   {path:'dashboard/gestion-ouvrier/impression', component:ImpressionOuvrierComponent},
   {path:'dashboard/parametre', component:ParametreComponent},
+  {path:'login', component:LoginComponent},
+  {path:'register', component:RegisterComponent},
   
   
 ];
