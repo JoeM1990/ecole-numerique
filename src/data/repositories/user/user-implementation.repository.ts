@@ -11,6 +11,8 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class UserImplementationRepository extends UserRepository {
+
+    baseUrl='http://localhost:8080';
     
     userMapper = new UserImplementationRepositoryMapper();
 
@@ -18,15 +20,15 @@ export class UserImplementationRepository extends UserRepository {
         super();
     }
 
-    login(params: {email: string, password: string}): Observable<UserModel> {
+    login(params: {email: string, password: string}): Observable<any> {
         return this.http
-            .post<UserEntity>('https://api-ecole.monkila-tech.com/login', {params})
+            .post<UserEntity>(this.baseUrl+'/api/auth/login', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
 
     register(params: {email: string, password: string}): Observable<UserModel> {
        return this.http
-            .post<UserEntity>('https://api-ecole.monkila-tech.com/register', {params})
+            .post<UserEntity>(this.baseUrl+'/api/auth/register', {params})
             .pipe(map(this.userMapper.mapFrom));
     }
     
