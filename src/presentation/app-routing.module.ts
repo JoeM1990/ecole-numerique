@@ -19,7 +19,7 @@ import { LoginComponent } from './auth-ui/login/login.component';
 import { RegisterComponent } from './auth-ui/register/register.component';
 
 const routes: Routes = [
-  {path:'', pathMatch: 'full', redirectTo: 'dashboard'},
+  {path:'', pathMatch: 'full', redirectTo: 'login'},
   {path:'dashboard', component:DashboardComponent,},
   {path:'dashboard/gestion-enseignant', component:GestionEnseignantComponent,},
   {path:'dashboard/gestion-enseignant/presence', component:PresenceEnseignantComponent},

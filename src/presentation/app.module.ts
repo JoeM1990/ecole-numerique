@@ -19,6 +19,10 @@ import { PayeOuvrierComponent } from './dashboard/pages/gestion-ouvrier/paye-ouv
 import { ImpressionOuvrierComponent } from './dashboard/pages/gestion-ouvrier/impression-ouvrier/impression-ouvrier.component';
 import { ParametreComponent } from './dashboard/pages/parametre/parametre.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataModule } from 'src/data/data.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './auth-ui/login/login.component';
+import { RegisterComponent } from './auth-ui/register/register.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +41,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FinanceOuvrierComponent,
     PayeOuvrierComponent,
     ImpressionOuvrierComponent,
-    ParametreComponent
+    ParametreComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DataModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

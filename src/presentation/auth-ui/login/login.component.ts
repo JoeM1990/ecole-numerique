@@ -10,12 +10,16 @@ import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
 
-  constructor(private router:Router){
+  constructor(private router:Router, private auth:UserLoginUseCase){
 
   }
   
+  ngOnInit(): void {
+      
+  }
+
   goTo(){
    this.router.navigate(['/register']);
   }
