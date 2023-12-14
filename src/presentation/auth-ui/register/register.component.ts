@@ -16,7 +16,6 @@ export class RegisterComponent implements OnInit{
   constructor(private router:Router, private auth:UserRegisterUseCase,
     public formBuilder: FormBuilder){
       this.registerForm = this.formBuilder.group({
-        id:null,
         username: ['', [Validators.required], ],
         email: ['', [Validators.required], ],
         password: ['', [Validators.required], ],
@@ -34,6 +33,9 @@ export class RegisterComponent implements OnInit{
   }
 
   register(){
-    this.auth.execute(this.registerForm.value)
+    // this.auth.execute(this.registerForm.value).subscribe(e=>{
+    //   console.log(e.message);
+    // })
+    console.log(this.registerForm.value)
   }
 }

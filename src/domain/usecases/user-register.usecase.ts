@@ -9,7 +9,7 @@ export class UserRegisterUseCase implements UseCase<{ email: string; password: s
 
     execute(
         user:UserModel,
-    ): Observable<UserModel> {
+    ): Observable<any> {
         return this.userRepository.register(user);
     }
 }

@@ -11,14 +11,14 @@
               <!-- <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6> -->
               <form class="pt-3" [formGroup]="registerForm">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" formControlName="username">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" formControlName="username" required>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" formControlName="email">
+                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" formControlName="email" required>
                 </div>
                 
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" formControlName="password" required>
                 </div>
                 <!-- <div class="mb-4">
                   <div class="form-check">
