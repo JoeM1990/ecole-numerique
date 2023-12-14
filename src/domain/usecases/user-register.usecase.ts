@@ -8,8 +8,8 @@ export class UserRegisterUseCase implements UseCase<{ email: string; password: s
     constructor(private userRepository: UserRepository) { }
 
     execute(
-        params: { email: string; password: string },
+        user:UserModel,
     ): Observable<UserModel> {
-        return this.userRepository.register(params);
+        return this.userRepository.register(user);
     }
 }

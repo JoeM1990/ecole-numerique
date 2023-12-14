@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
 
 
 @Component({
@@ -9,8 +11,18 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit{
 
-  constructor(private router:Router){
-
+  public registerForm: FormGroup;
+  
+  constructor(private router:Router, private auth:UserRegisterUseCase,
+    public formBuilder: FormBuilder){
+      this.registerForm = this.formBuilder.group({
+        id:null,
+        username: ['', [Validators.required], ],
+        email: ['', [Validators.required], ],
+        password: ['', [Validators.required], ],
+        role: 'user',
+        status: 'actif',
+      });
   }
 
   ngOnInit(): void {
@@ -21,7 +33,7 @@ export class RegisterComponent implements OnInit{
    this.router.navigate(['/login']);
   }
 
-  Register(){
-
+  register(){
+    this.auth.execute(this.registerForm.value)
   }
 }
