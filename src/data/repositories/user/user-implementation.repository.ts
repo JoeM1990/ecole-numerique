@@ -22,13 +22,13 @@ export class UserImplementationRepository extends UserRepository {
 
     login(params: {email: string, password: string}): Observable<any> {
         return this.http
-            .post<UserEntity>(this.baseUrl+'/api/auth/login', {params})
+            .post<UserEntity>(this.baseUrl+'/api/auth/login', params)
             .pipe(map(this.userMapper.mapFrom));
     }
 
-    register(params: {email: string, password: string}): Observable<UserModel> {
+    register(user:UserModel): Observable<any> {
        return this.http
-            .post<UserEntity>(this.baseUrl+'/api/auth/register', {params})
+            .post<UserEntity>(this.baseUrl+'/api/auth/register', user)
             .pipe(map(this.userMapper.mapFrom));
     }
     

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
 export class RegisterComponent implements OnInit{
 
   public registerForm: FormGroup;
+  state = false;
   
   constructor(private router:Router, private auth:UserRegisterUseCase,
     public formBuilder: FormBuilder){
@@ -33,9 +35,17 @@ export class RegisterComponent implements OnInit{
   }
 
   register(){
-    // this.auth.execute(this.registerForm.value).subscribe(e=>{
-    //   console.log(e.message);
-    // })
-    console.log(this.registerForm.value)
+    this.state = true;
+
+    this.auth.execute(this.registerForm.value).subscribe((res)=>{
+        console.log('Votre compte a été créé avec succès');
+        this.state = false;
+        this.router.navigate(['/login'])
+      }, (err:HttpErrorResponse) => {
+        console.log(err.error.message)
+        this.state = false;
+     }
+    )
+    //console.log(this.registerForm.value)
   }
 }

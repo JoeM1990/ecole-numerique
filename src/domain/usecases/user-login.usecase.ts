@@ -9,7 +9,7 @@ export class UserLoginUseCase implements UseCase<{ email: string; password: stri
 
     execute(
        params: { email: string, password: string },
-    ): Observable<UserModel> {
+    ): Observable<any> {
         return this.userRepository.login(params);
     }
 }

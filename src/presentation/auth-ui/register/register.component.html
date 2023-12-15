@@ -28,6 +28,14 @@
                     </label>
                   </div>
                 </div> -->
+                <ng-container *ngIf="state">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-container>
+                
                 <div class="mt-3">
                   <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" (click)="register()">Valider</a>
                 </div>

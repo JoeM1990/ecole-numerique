@@ -12,6 +12,7 @@ export class UserImplementationRepositoryMapper extends Mapper<UserEntity, UserM
             password: param.password,
             role: param.role,
             status: param.status,
+            accessToken: param.accessToken
         };
     }
     mapTo(param: UserModel): UserEntity {
@@ -22,6 +23,7 @@ export class UserImplementationRepositoryMapper extends Mapper<UserEntity, UserM
             password: param.password,
             role: param.role,
             status: param.status,
+            accessToken: param.accessToken
         }
     }
 }
