@@ -13,6 +13,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 export class RegisterComponent implements OnInit{
 
   public registerForm: FormGroup;
+  state = false;
   
   constructor(private router:Router, private auth:UserRegisterUseCase,
     public formBuilder: FormBuilder){
@@ -34,12 +35,15 @@ export class RegisterComponent implements OnInit{
   }
 
   register(){
+    this.state = true;
+
     this.auth.execute(this.registerForm.value).subscribe((res)=>{
-        console.log('Votre compte a été créé avec succès')
+        console.log('Votre compte a été créé avec succès');
+        this.state = false;
         this.router.navigate(['/login'])
       }, (err:HttpErrorResponse) => {
         console.log(err.error.message)
-        window.location.reload()
+        this.state = false;
      }
     )
     //console.log(this.registerForm.value)
