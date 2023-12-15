@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -33,9 +34,12 @@ export class RegisterComponent implements OnInit{
   }
 
   register(){
-    // this.auth.execute(this.registerForm.value).subscribe(e=>{
-    //   console.log(e.message);
-    // })
-    console.log(this.registerForm.value)
+    this.auth.execute(this.registerForm.value).subscribe((res)=>{
+        console.log('Success')
+      }, (err:HttpErrorResponse) => {
+        console.log(err.error.message)
+     }
+    )
+    //console.log(this.registerForm.value)
   }
 }
