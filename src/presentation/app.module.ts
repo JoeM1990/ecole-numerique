@@ -23,6 +23,11 @@ import { DataModule } from 'src/data/data.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth-ui/login/login.component';
 import { RegisterComponent } from './auth-ui/register/register.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ErrorComponent } from './dialog/error/error.component';
+import { SuccessComponent } from './dialog/success/success.component';
+import { ConfirmationComponent } from './dialog/confirmation/confirmation.component';
+import { WaitingComponent } from './dialog/waiting/waiting.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,11 @@ import { RegisterComponent } from './auth-ui/register/register.component';
     ImpressionOuvrierComponent,
     ParametreComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmationComponent,
+    SuccessComponent,
+    ErrorComponent,
+    WaitingComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +61,7 @@ import { RegisterComponent } from './auth-ui/register/register.component';
     DataModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
