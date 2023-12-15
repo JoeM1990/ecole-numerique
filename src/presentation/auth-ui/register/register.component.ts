@@ -5,6 +5,7 @@ import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
+import { SuccessComponent } from 'src/presentation/dialog/success/success.component';
 
 
 @Component({
@@ -40,12 +41,14 @@ export class RegisterComponent implements OnInit{
     this.state = true;
 
     this.auth.execute(this.registerForm.value).subscribe((res)=>{
-        this.dialog.open(ErrorComponent,{data:'Votre compte a été créé avec succès'})
+        let refDialog = this.dialog.open(SuccessComponent,{data:'Votre compte a été créé avec succès'})
         this.state = false;
+        refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
         this.router.navigate(['/login'])
       }, (err:HttpErrorResponse) => {
-        this.dialog.open(ErrorComponent,{data:err.error.message})
+        let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message})
         this.state = false;
+        refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
      }
     )
     //console.log(this.registerForm.value)

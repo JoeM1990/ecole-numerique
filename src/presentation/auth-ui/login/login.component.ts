@@ -31,18 +31,22 @@ export class LoginComponent implements OnInit{
     this.state = true;
 
     if(!email){
-      this.dialog.open(ErrorComponent,{data:"Veuillez introduire le nom d'utilisateur"});
+      let refDialog = this.dialog.open(ErrorComponent,{data:"Veuillez introduire le nom d'utilisateur"});
       this.state = false;
+      refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
     }else if(!password){
-      this.dialog.open(ErrorComponent,{data:'Veuillez introduire le mot de passe'});
+      let refDialog = this.dialog.open(ErrorComponent,{data:'Veuillez introduire le mot de passe'});
       this.state = false;
+      refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
     }else{
       this.auth.execute({email,password}).subscribe((res)=>{
-        console.log(res.accessToken);
+        localStorage.setItem('token',res.accessToken)
+        this.router.navigate(['/dashboard'])
         this.state = false;
           }, (err:HttpErrorResponse) => {
-            this.dialog.open(ErrorComponent,{data:err.error.message});
+            let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
             this.state = false;
+            refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
         }
       )
     }
