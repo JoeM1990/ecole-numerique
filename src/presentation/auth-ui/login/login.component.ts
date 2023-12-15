@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
@@ -24,9 +25,12 @@ export class LoginComponent implements OnInit{
    this.router.navigate(['/register']);
   }
 
-  login(){
-    // this.auth.login({email,password}).subscribe(e=>{
-    //   console.log(e.accesstoken);
-    // })
+  login(email:any, password:any){
+    this.auth.execute({email,password}).subscribe((res)=>{
+      console.log(res)
+    }, (err:HttpErrorResponse) => {
+      console.log(err.error.message)
+   }
+    )
   }
 }

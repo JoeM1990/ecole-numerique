@@ -5,4 +5,5 @@ export interface UserModel {
     password: string;
     role: string;
     status: string;
+    accessToken: string;
 }

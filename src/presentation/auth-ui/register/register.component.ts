@@ -35,9 +35,11 @@ export class RegisterComponent implements OnInit{
 
   register(){
     this.auth.execute(this.registerForm.value).subscribe((res)=>{
-        console.log('Success')
+        console.log('Votre compte a été créé avec succès')
+        this.router.navigate(['/login'])
       }, (err:HttpErrorResponse) => {
         console.log(err.error.message)
+        window.location.reload()
      }
     )
     //console.log(this.registerForm.value)

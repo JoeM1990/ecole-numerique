@@ -5,4 +5,5 @@ export interface UserEntity {
     password: string;
     role: string;
     status: string;
+    accessToken: string;
 }
