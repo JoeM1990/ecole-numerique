@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import * as e from 'express';
+import { Auth } from 'src/domain/usecases/auth';
 import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
 
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit{
 
   state=false;
 
-  constructor(private router:Router, private auth:UserLoginUseCase, private dialog:MatDialog){
+  constructor(private router:Router, private auth:Auth, private dialog:MatDialog){
 
   }
   
@@ -39,16 +41,8 @@ export class LoginComponent implements OnInit{
       this.state = false;
       refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
     }else{
-      this.auth.execute({email,password}).subscribe((res)=>{
-        localStorage.setItem('token',res.accessToken)
-        this.router.navigate(['/dashboard'])
-        this.state = false;
-          }, (err:HttpErrorResponse) => {
-            let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
-            this.state = false;
-            refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
-        }
-      )
+      this.auth.login(email, password);
+      this.state = false;
     }
     
   }

@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ErrorComponent } from "src/presentation/dialog/error/error.component";
+import { UserLoginUseCase } from "./user-login.usecase";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +13,20 @@ export class Auth {
 
     private isAuthenticated = false;
 
-    constructor(private router:Router, private dialog:MatDialog) { }
+    constructor(private router:Router, private dialog:MatDialog, private auth:UserLoginUseCase) { }
+
+
+    login(email:any, password:any){
+        this.auth.execute({email,password}).subscribe((res)=>{
+            localStorage.setItem('token',res.accessToken);
+            this.router.navigate(['/dashboard']);
+              }, (err:HttpErrorResponse) => {
+                let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
+                refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
+                
+            }
+          )
+    }
 
     checkLogin():boolean{
         this.isAuthenticated = true;
