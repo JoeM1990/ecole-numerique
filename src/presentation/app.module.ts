@@ -28,6 +28,8 @@ import { ErrorComponent } from './dialog/error/error.component';
 import { SuccessComponent } from './dialog/success/success.component';
 import { ConfirmationComponent } from './dialog/confirmation/confirmation.component';
 import { WaitingComponent } from './dialog/waiting/waiting.component';
+import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
+
 
 @NgModule({
   declarations: [
