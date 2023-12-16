@@ -22,7 +22,7 @@ import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
 
 const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo: 'login'},
-  {path:'dashboard', component:DashboardComponent,},
+  {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
   {path:'dashboard/gestion-enseignant', component:GestionEnseignantComponent,},
   {path:'dashboard/gestion-enseignant/presence', component:PresenceEnseignantComponent},
   {path:'dashboard/gestion-enseignant/paye', component:PayeEnseignantComponent},
