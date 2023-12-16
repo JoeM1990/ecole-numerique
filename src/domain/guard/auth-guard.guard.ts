@@ -4,11 +4,13 @@ import {UserLoginUseCase} from '../usecases/user-login.usecase'
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorComponent } from '../../presentation/dialog/error/error.component';
 import {Auth} from '../usecases/auth'
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad  {
-  constructor(private authService: Auth, private router: Router) {}
+
+  constructor(private authService: Auth, private router: Router, private dialog:MatDialog) {}
 
   canActivate(): boolean {
     return this.checkAuth();
@@ -26,7 +28,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad  {
     if (this.authService.isAuthenticatedUser()) {
       return true;
     } else {
-      // Redirect to the login page if the user is not authenticated
+      let refDialog = this.dialog.open(ErrorComponent,{data:"Vous n'avez pas acces a ce systeme"})
+      refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
       this.router.navigate(['/login']);
       return false;
     }

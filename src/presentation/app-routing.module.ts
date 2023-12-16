@@ -17,10 +17,12 @@ import { ImpressionOuvrierComponent } from './dashboard/pages/gestion-ouvrier/im
 import { ParametreComponent } from './dashboard/pages/parametre/parametre.component';
 import { LoginComponent } from './auth-ui/login/login.component';
 import { RegisterComponent } from './auth-ui/register/register.component';
+import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
+
 
 const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo: 'login'},
-  {path:'dashboard', component:DashboardComponent},
+  {path:'dashboard', component:DashboardComponent,},
   {path:'dashboard/gestion-enseignant', component:GestionEnseignantComponent,},
   {path:'dashboard/gestion-enseignant/presence', component:PresenceEnseignantComponent},
   {path:'dashboard/gestion-enseignant/paye', component:PayeEnseignantComponent},
