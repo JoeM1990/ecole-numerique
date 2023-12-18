@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as e from 'express';
-import { Auth } from 'src/domain/usecases/auth';
+import { AuthService } from 'src/domain/usecases/auth';
 import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
 
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit{
 
   state=false;
 
-  constructor(private router:Router, private auth:Auth, private dialog:MatDialog){
+  constructor(private router:Router, private auth:AuthService, private dialog:MatDialog){
 
   }
   
