@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ErrorComponent } from "src/presentation/dialog/error/error.component";
 import { UserLoginUseCase } from "./user-login.usecase";
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {CookieService} from 'ngx-cookie-service';
 @Injectable({
@@ -18,10 +18,11 @@ export class AuthService {
 
     login(email:any, password:any){
         this.auth.execute({email,password}).subscribe((res)=>{
-            localStorage.setItem('token',res.accessToken);
+            //localStorage.setItem('token',res.accessToken);
             //window.sessionStorage.setItem('token',res.accessToken);
             this.cookieService.set('token', res.accessToken, {secure: true});
             //this.router.navigate(['/dashboard']);
+           
               }, (err:HttpErrorResponse) => {
                 let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
                 refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
