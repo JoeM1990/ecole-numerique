@@ -31,6 +31,7 @@ import { WaitingComponent } from './dialog/waiting/waiting.component';
 import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,7 @@ import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
     DataModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
