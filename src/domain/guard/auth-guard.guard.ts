@@ -2,7 +2,7 @@ import { inject } from "@angular/core";
 import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
 
 import { Observable } from "rxjs";
-import { AuthService } from "../usecases/AuthService";
+import { AuthService } from "../usecases/auth";
 
 export const AuthGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
