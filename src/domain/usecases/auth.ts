@@ -43,7 +43,7 @@ export class AuthService {
 
     checkLogin():boolean{
         this.isAuthenticated = true;
-        return !! localStorage.getItem('token');
+        return !! this.cookieService.get('token');
     }
 
     isAuthenticatedUser(): boolean {
@@ -51,7 +51,8 @@ export class AuthService {
     }
   
     logout(){
-        localStorage.removeItem('token');
+        this.cookieService.delete('token');
+        this.cookieService.delete('key_app');
         this.isAuthenticated = false;
         this.router.navigate(['/login']);
     }
