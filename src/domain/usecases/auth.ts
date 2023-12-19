@@ -21,7 +21,7 @@ export class AuthService {
             //localStorage.setItem('token',res.accessToken);
             //window.sessionStorage.setItem('token',res.accessToken);
             this.cookieService.set('token', res.accessToken, {secure: true});
-            //this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard']);
            
               }, (err:HttpErrorResponse) => {
                 let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
