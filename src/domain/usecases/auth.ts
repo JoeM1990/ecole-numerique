@@ -6,21 +6,29 @@ import { UserLoginUseCase } from "./user-login.usecase";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {CookieService} from 'ngx-cookie-service';
+import {NgxSecureCookieService} from 'ngx-secure-cookie'
 @Injectable({
     providedIn: 'root'
   })
 export class AuthService {
 
     private isAuthenticated = false;
+    key:any;
+   
+    // this.cookie.set("test","test value",true,key);
 
     constructor(private router:Router, private dialog:MatDialog, private auth:UserLoginUseCase,
-        private cookieService: CookieService) { }
+        private cookieService: CookieService, private cookie:NgxSecureCookieService,) { }
 
     login(email:any, password:any){
         this.auth.execute({email,password}).subscribe((res)=>{
             //localStorage.setItem('token',res.accessToken);
             //window.sessionStorage.setItem('token',res.accessToken);
-            this.cookieService.set('token', res.accessToken, {secure: true});
+            this.key = this.cookie.generateKey();
+            this.cookie.set('key_app',this.key,true);
+            this.cookie.set('token','appa',true,this.key);
+            
+            // this.cookieService.set('token', res.accessToken, {secure: true});
             //this.router.navigate(['/dashboard']);
            
               }, (err:HttpErrorResponse) => {
