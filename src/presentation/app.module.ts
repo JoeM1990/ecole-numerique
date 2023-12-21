@@ -29,6 +29,11 @@ import { SuccessComponent } from './dialog/success/success.component';
 import { ConfirmationComponent } from './dialog/confirmation/confirmation.component';
 import { WaitingComponent } from './dialog/waiting/waiting.component';
 import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -65,6 +70,11 @@ import { AuthGuard } from 'src/domain/guard/auth-guard.guard';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
