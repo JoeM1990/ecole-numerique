@@ -51,8 +51,8 @@ export class AuthService {
     }
   
     logout(){
-        this.cookieService.delete('token');
-        this.cookieService.delete('key_app');
+        this.cookie.delete('token');
+        this.cookie.delete('key_app');
         this.isAuthenticated = false;
         this.router.navigate(['/login']);
     }
