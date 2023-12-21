@@ -40,7 +40,8 @@ export class RegisterComponent implements OnInit{
   register(){
     this.state = true;
 
-    this.auth.execute(this.registerForm.value).subscribe((res)=>{
+    if(this.registerForm.valid){
+      this.auth.execute(this.registerForm.value).subscribe((res)=>{
         let refDialog = this.dialog.open(SuccessComponent,{data:'Votre compte a été créé avec succès'})
         this.state = false;
         refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
@@ -51,6 +52,13 @@ export class RegisterComponent implements OnInit{
         refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
      }
     )
+    }else{
+      let refDialog = this.dialog.open(ErrorComponent,{data:'Formulaire vide ou mal remplis'})
+      this.state = false;
+      refDialog.afterOpened().subscribe(_ => {setTimeout(() => {refDialog.close();}, 1000)})
+    }
+
+    
     //console.log(this.registerForm.value)
   }
 }
