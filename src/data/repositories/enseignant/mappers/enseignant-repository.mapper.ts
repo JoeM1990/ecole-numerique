@@ -6,23 +6,29 @@ export class EnseignantImplementationRepositoryMapper extends Mapper<EnseignantE
     mapFrom(param: EnseignantEntity): EnseignantModel {
         return {
             id: param.id,
-            email: param.email,
-            username: param.username,
-            password: param.password,
-            role: param.role,
-            status: param.status,
-            accessToken: param.accessToken
+            nom: param.nom,
+            postnom: param.postnom,
+            prenom: param.prenom,
+            lieu: param.lieu,
+            date: param.date,
+            etat: param.etat,
+            sexe: param.sexe,
+            telephone: param.telephone,
+            adresse: param.adresse,
         };
     }
     mapTo(param: EnseignantModel): EnseignantEntity {
         return {
             id: param.id,
-            username: param.username,
-            email: param.email,
-            password: param.password,
-            role: param.role,
-            status: param.status,
-            accessToken: param.accessToken
+            nom: param.nom,
+            postnom: param.postnom,
+            prenom: param.prenom,
+            lieu: param.lieu,
+            date: param.date,
+            etat: param.etat,
+            sexe: param.sexe,
+            telephone: param.telephone,
+            adresse: param.adresse,
         }
     }
 }
