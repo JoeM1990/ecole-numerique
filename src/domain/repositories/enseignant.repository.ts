@@ -1,5 +1,7 @@
+import { Observable } from "rxjs";
+import { EnseignantModel } from "../models/enseignant.model";
+
 export abstract class EnseignantRepository {
-    // abstract login(params: {email: string, password: string}): Observable<UserModel>;
-    // abstract register(user:UserModel): Observable<any>;
-    // abstract getUserProfile(): Observable<UserModel>;
+    abstract create(enseigant:EnseignantModel): Observable<EnseignantModel>;
+   
 }
