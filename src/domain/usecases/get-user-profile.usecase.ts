@@ -10,4 +10,5 @@ export class GetUserProfileUseCase implements UseCase<void, UserModel> {
     execute(): Observable<UserModel> {
         return this.userRepository.getUserProfile();
     }
+    
 }
