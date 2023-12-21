@@ -32,6 +32,51 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
         return this.http
             .post<EnseignantEntity>(this.baseUrl+'/api/enseigant', enseignant, {headers: headers})
+            .pipe(map(this.enseignantMapper.mapTo));
+    }
+
+    read(): Observable<any> {
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
+
+
+        return this.http
+            .get<EnseignantEntity>(this.baseUrl+'/api/enseigant', {headers: headers})
+            .pipe(map(this.enseignantMapper.mapFrom));
+    }
+
+    update(enseignant:EnseignantModel): Observable<any> {
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
+
+
+        return this.http
+            .put<EnseignantEntity>(this.baseUrl+'/api/enseigant/'+enseignant.id, enseignant, {headers: headers})
+            .pipe(map(this.enseignantMapper.mapFrom));
+    }
+
+    delete(enseignant:EnseignantModel): Observable<any> {
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
+
+
+        return this.http
+            .delete<EnseignantEntity>(this.baseUrl+'/api/enseigant'+enseignant.id, {headers: headers})
             .pipe(map(this.enseignantMapper.mapFrom));
     }
 
