@@ -25,11 +25,13 @@ export class AuthService {
             //localStorage.setItem('token',res.accessToken);
             //window.sessionStorage.setItem('token',res.accessToken);
             this.key = this.cookie.generateKey();
-            this.cookie.set('key_app',this.key,true);
-            this.cookie.set('token','appa',true,this.key);
+            this.cookie.set('key_app',this.key,false);
+            this.cookie.set('token',res.accessToken,true,this.key);
+
+            //console.log(this.cookie.get('token',true,this.cookie.get('key_app',false)));
             
             // this.cookieService.set('token', res.accessToken, {secure: true});
-            //this.router.navigate(['/dashboard']);
+           this.router.navigate(['/dashboard']);
            
               }, (err:HttpErrorResponse) => {
                 let refDialog = this.dialog.open(ErrorComponent,{data:err.error.message});
@@ -41,7 +43,7 @@ export class AuthService {
 
     checkLogin():boolean{
         this.isAuthenticated = true;
-        return !! localStorage.getItem('token');
+        return !! this.cookieService.get('token');
     }
 
     isAuthenticatedUser(): boolean {
@@ -49,7 +51,8 @@ export class AuthService {
     }
   
     logout(){
-        localStorage.removeItem('token');
+        this.cookie.delete('token');
+        this.cookie.delete('key_app');
         this.isAuthenticated = false;
         this.router.navigate(['/login']);
     }

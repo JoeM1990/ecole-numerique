@@ -1,10 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/domain/usecases/auth';
+import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-impression-eleves',
   templateUrl: './impression-eleves.component.html',
   styleUrls: ['./impression-eleves.component.css']
 })
-export class ImpressionElevesComponent {
+export class ImpressionElevesComponent implements OnInit{
 
+  constructor(private auth:AuthService, private dialog:MatDialog){}
+
+  ngOnInit(): void {
+      
+  }
+
+  logout(){
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous vous de connecter?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+        this.auth.logout();
+      }
+    })
+  }
 }
+
