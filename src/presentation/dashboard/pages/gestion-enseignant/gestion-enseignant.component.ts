@@ -18,7 +18,7 @@ import { EnseignantModel } from 'src/domain/models/enseignant.model';
 export class GestionEnseignantComponent implements OnInit, AfterViewInit{
 
   displayedColumns: string[] = ['id', 'nom', 'postnom', 'prenom', 'lieu', 'date', 'etat', 'sexe', 'telephone', 'adresse'];
-  dataSource!: MatTableDataSource<EnseignantModel>;
+  dataSource!: MatTableDataSource<EnseignantEntity>;
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,11 +30,11 @@ export class GestionEnseignantComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-      this.crud.execute().forEach(res=>{
-        //this.dataSource = new MatTableDataSource(res)
-       // this.dataSource =  new MatTableDataSource(res)
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
+      this.crud.execute().subscribe((res)=>{
+        console.log(res)
+        this.dataSource.data=res
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       })
   }
 

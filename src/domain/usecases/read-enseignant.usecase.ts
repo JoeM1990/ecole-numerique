@@ -4,12 +4,12 @@ import { EnseignantEntity } from "src/data/repositories/enseignant/entities/ense
 import { EnseignantModel } from "../models/enseignant.model";
 import { EnseignantRepository } from "../repositories/enseignant.repository";
 
-export class ReadEnseignantUseCase implements UseCase<EnseignantModel, EnseignantEntity> {
+export class ReadEnseignantUseCase implements UseCase<EnseignantModel, EnseignantEntity[]> {
 
     constructor(private enseignantRepository: EnseignantRepository) { }
 
-    execute(): Observable<EnseignantModel> {
-        return this.enseignantRepository.read()
+    execute(): Observable<EnseignantEntity[]> {
+        return this.enseignantRepository.read();
     }
     
 }

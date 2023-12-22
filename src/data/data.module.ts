@@ -6,6 +6,11 @@ import { UserLoginUseCase } from '../domain/usecases/user-login.usecase';
 import { UserRegisterUseCase } from '../domain/usecases/user-register.usecase';
 import { GetUserProfileUseCase } from '../domain/usecases/get-user-profile.usecase';
 import { UserImplementationRepository } from './repositories/user/user-implementation.repository';
+import { EnseignantRepository } from 'src/domain/repositories/enseignant.repository';
+import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
+import { EnseignantImplementationRepository } from './repositories/enseignant/enseignant-implementation.repository';
+import { NgxSecureCookieService } from 'ngx-secure-cookie/lib/ngx-secure-cookie.service';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 
 
 const userLoginUseCaseFactory = 
@@ -32,12 +37,33 @@ const getUserProfileUseCaseFactory =
         deps: [UserRepository],
     };
 
+
+const createEnseigantUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new CreateEnseignantUseCase(enseigantRepo);
+    export const createEnseigantUseCaseProvider = {
+        provide: CreateEnseignantUseCase,
+        useFactory: createEnseigantUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+const readEnseigantUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new ReadEnseignantUseCase(enseigantRepo);
+    export const readEnseigantUseCaseProvider = {
+        provide: ReadEnseignantUseCase,
+        useFactory: readEnseigantUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+
 @NgModule({
     providers: [
         userLoginUseCaseProvider,
         userRegisterUseCaseProvider,
         getUserProfileUseCaseProvider,
+        createEnseigantUseCaseProvider,
+        readEnseigantUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
+        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
     ],
     imports: [
         CommonModule,
