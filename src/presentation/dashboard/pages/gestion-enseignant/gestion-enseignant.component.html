@@ -200,6 +200,16 @@
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</th>
                   <td mat-cell *matCellDef="let row"> {{row.adresse}} </td>
                 </ng-container>
+
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+                  <td mat-cell *matCellDef="let row">
+                    <i class="fas fa-eye fa-lg text-success mr-2" ></i>
+                    <i class="fas fa-edit fa-lg text-info mr-2"></i>
+                    <i class="fas fa-trash-alt fa-lg text-danger" ></i>
+                  </td>
+                </ng-container>
           
                
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -212,7 +222,7 @@
 
               </table>
             
-              <mat-paginator [pageSizeOptions]="[3, 9, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
             </div>
           
           
