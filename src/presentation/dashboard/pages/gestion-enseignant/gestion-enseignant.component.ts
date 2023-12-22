@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { EnseignantModel } from 'src/domain/models/enseignant.model';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -18,23 +19,24 @@ import { EnseignantModel } from 'src/domain/models/enseignant.model';
 export class GestionEnseignantComponent implements OnInit, AfterViewInit{
 
   displayedColumns: string[] = ['id', 'nom', 'postnom', 'prenom', 'lieu', 'date', 'etat', 'sexe', 'telephone', 'adresse'];
-  dataSource!: MatTableDataSource<EnseignantEntity>;
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private auth:AuthService, private dialog:MatDialog, private crud:ReadEnseignantUseCase){
+  enseignant:EnseignantEntity[]=[];
+
+  constructor(private auth:AuthService, private dialog:MatDialog, private crud:ReadEnseignantUseCase, private http:HttpClient){
     // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     // this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit(): void {
       this.crud.execute().subscribe((res)=>{
-
-      
-        this.dataSource = new MatTableDataSource(res)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        console.log(res)
+        //this.dataSource = new MatTableDataSource(res)
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
       })
   }
 
