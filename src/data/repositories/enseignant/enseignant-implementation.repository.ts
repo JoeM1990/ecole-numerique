@@ -37,11 +37,11 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
             .pipe(map(this.enseignantMapper.mapTo));
     }
 
-    read(): Observable<any> {
+    read(): Observable<EnseignantEntity[]> {
 
         // let key_app = this.cookie.get('key_app', false);
         // let token = this.cookie.get('token', true, key_app);
-        let token='';
+        let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAzMjM2OTE1LCJleHAiOjE3MDMyNDA1MTV9.G58_7HsrM4jA3R8ZR5qWk7Pz5ozrEyftQzZit0a660c';
 
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -49,8 +49,8 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl2)
-            .pipe(map(this.enseignantMapper.mapFrom));
+            .get<EnseignantEntity[]>(this.baseUrl, {headers: headers})
+            //.pipe(map(this.enseignantMapper.mapFrom));
     }
 
     update(enseignant:EnseignantModel): Observable<any> {
