@@ -200,6 +200,12 @@
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</th>
                   <td mat-cell *matCellDef="let row"> {{row.adresse}} </td>
                 </ng-container>
+
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+                  <td mat-cell *matCellDef="let row"></td>
+                </ng-container>
           
                
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -49,7 +49,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'/api/enseignant', {headers: headers})
+            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: headers})
             
     }
 
@@ -65,7 +65,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .put<EnseignantEntity>(this.baseUrl+'/api/enseigant/'+enseignant.id, enseignant, {headers: headers})
+            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: headers})
             
     }
 
@@ -81,7 +81,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'/api/enseigant'+enseignant.id, {headers: headers})
+            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: headers})
            
     }
 
