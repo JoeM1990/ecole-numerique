@@ -5,47 +5,10 @@ import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/conf
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
+import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
+import { EnseignantModel } from 'src/domain/models/enseignant.model';
 
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -54,19 +17,25 @@ const NAMES: string[] = [
 })
 export class GestionEnseignantComponent implements OnInit, AfterViewInit{
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource!: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['id', 'nom', 'postnom', 'prenom', 'lieu', 'date', 'etat', 'sexe', 'telephone', 'adresse'];
+  dataSource!: MatTableDataSource<EnseignantModel>;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private auth:AuthService, private dialog:MatDialog){
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private auth:AuthService, private dialog:MatDialog, private crud:ReadEnseignantUseCase){
+    // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    // this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit(): void {
-      
+      this.crud.execute().forEach(res=>{
+        //this.dataSource = new MatTableDataSource(res)
+       // this.dataSource =  new MatTableDataSource(res)
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+      })
   }
 
   logout(){
@@ -79,8 +48,8 @@ export class GestionEnseignantComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -93,18 +62,18 @@ export class GestionEnseignantComponent implements OnInit, AfterViewInit{
   }
 }
 
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+// function createNewUser(id: number): UserData {
+//   const name =
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+//     ' ' +
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+//     '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
-}
+//   return {
+//     id: id.toString(),
+//     name: name,
+//     progress: Math.round(Math.random() * 100).toString(),
+//     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+//   };
+// }
 

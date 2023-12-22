@@ -13,6 +13,7 @@ import { NgxSecureCookieService } from "ngx-secure-cookie/lib/ngx-secure-cookie.
 export class EnseignantImplementationRepository extends EnseignantRepository {
 
     baseUrl='http://localhost:8080';
+    baseUrl2='https://61a1077b6c3b400017e69b7c.mockapi.io/enseignant'
 
     enseignantMapper = new EnseignantImplementationRepositoryMapper();
 
@@ -46,7 +47,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'/api/enseigant', {headers: headers})
+            .get<EnseignantEntity>(this.baseUrl2)
             .pipe(map(this.enseignantMapper.mapFrom));
     }
 

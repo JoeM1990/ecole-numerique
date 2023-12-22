@@ -151,28 +151,57 @@
             
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
                   <td mat-cell *matCellDef="let row"> {{row.id}} </td>
                 </ng-container>
             
                 <!-- Progress Column -->
-                <ng-container matColumnDef="progress">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                  <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                <ng-container matColumnDef="nom">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+                  <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
                 </ng-container>
-            
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                  <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+
+                <ng-container matColumnDef="postnom">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Postnom</th>
+                  <td mat-cell *matCellDef="let row"> {{row.postnom}} </td>
                 </ng-container>
-            
-                <!-- Fruit Column -->
-                <ng-container matColumnDef="fruit">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
-                  <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+
+                <ng-container matColumnDef="prenom">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Prenom</th>
+                  <td mat-cell *matCellDef="let row"> {{row.prenom}} </td>
                 </ng-container>
-            
+
+                <ng-container matColumnDef="lieu">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu de Naissance</th>
+                  <td mat-cell *matCellDef="let row"> {{row.lieu}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de naissance</th>
+                  <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="etat">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Etat civil</th>
+                  <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sexe">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Sexe</th>
+                  <td mat-cell *matCellDef="let row"> {{row.sexe}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="telephone">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Telephone</th>
+                  <td mat-cell *matCellDef="let row"> {{row.telephone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="adresse">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</th>
+                  <td mat-cell *matCellDef="let row"> {{row.adresse}} </td>
+                </ng-container>
+          
+               
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             
