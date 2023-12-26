@@ -7,7 +7,6 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
-import { EnseignantModel } from 'src/domain/models/enseignant.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
