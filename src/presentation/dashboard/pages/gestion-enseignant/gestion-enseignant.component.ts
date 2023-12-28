@@ -18,6 +18,7 @@ export class GestionEnseignantComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'nom', 'postnom', 'prenom', 'lieu', 'date', 'etat', 'sexe', 'telephone', 'adresse', 'actions'];
   dataSource!: MatTableDataSource<EnseignantEntity>;
+  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
