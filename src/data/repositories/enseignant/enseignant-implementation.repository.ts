@@ -47,9 +47,14 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
+        console.log(headers.get('x-access-token'))
+
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: headers})
+            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
             
     }
 
@@ -59,15 +64,16 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         let token = this.cookie.get('token', true, key_app);
         
      
-        
-
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
 
         return this.http
-            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: headers})
+            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
             
     }
 
@@ -84,7 +90,10 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: headers})
+            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
            
     }
 
