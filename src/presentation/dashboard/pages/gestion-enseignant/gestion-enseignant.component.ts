@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -24,7 +25,8 @@ export class GestionEnseignantComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   
-  constructor(private auth:AuthService, private dialog:MatDialog, private crudRead:ReadEnseignantUseCase, private http:HttpClient){
+  constructor(private auth:AuthService, private dialog:MatDialog, 
+    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, ){
   }
 
   ngOnInit(): void {
@@ -53,6 +55,15 @@ export class GestionEnseignantComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  updateData(){
+
+  }
+
+  addData(){
+
   }
 }
 
