@@ -39,8 +39,6 @@ const routes: Routes = [
   {path:'dashboard/parametre', component:ParametreComponent, canActivate:[AuthGuard]},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  
-  
 ];
 
 @NgModule({

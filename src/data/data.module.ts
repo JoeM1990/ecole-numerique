@@ -9,8 +9,9 @@ import { UserImplementationRepository } from './repositories/user/user-implement
 import { EnseignantRepository } from 'src/domain/repositories/enseignant.repository';
 import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
 import { EnseignantImplementationRepository } from './repositories/enseignant/enseignant-implementation.repository';
-import { NgxSecureCookieService } from 'ngx-secure-cookie/lib/ngx-secure-cookie.service';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
+import { NgxSecureCookieService } from 'ngx-secure-cookie';
+
 
 
 const userLoginUseCaseFactory = 

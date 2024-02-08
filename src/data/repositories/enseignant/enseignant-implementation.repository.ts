@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, map } from "rxjs";
 import { EnseignantModel } from "src/domain/models/enseignant.model";
 import { EnseignantEntity } from "./entities/enseignant-entity";
-import { NgxSecureCookieService } from "ngx-secure-cookie/lib/ngx-secure-cookie.service";
+import { NgxEncryptCookieService } from "ngx-encrypt-cookie";
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +17,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
     enseignantMapper = new EnseignantImplementationRepositoryMapper();
 
-    constructor(private http: HttpClient, private cookie:NgxSecureCookieService) {
+    constructor(private http: HttpClient, private cookie:NgxEncryptCookieService) {
         super();
     }
 
@@ -26,6 +26,8 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
         
+       
+
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
@@ -39,14 +41,20 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
+        
        
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
+        console.log(headers.get('x-access-token'))
+
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: headers})
+            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
             
     }
 
@@ -55,14 +63,17 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
         
-
+     
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
 
         return this.http
-            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: headers})
+            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
             
     }
 
@@ -70,6 +81,8 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
+        
+ 
        
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -77,7 +90,10 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: headers})
+            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
            
     }
 

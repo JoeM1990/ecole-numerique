@@ -108,38 +108,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
 
-            <button class="btn btn-primary btn-rounded"> Ajouter</button>
-<!-- 
-            <div class="table-responsive pt-3">
-                
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nom</th>
-                                <th>Postnom</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>r</td>
-                                <td>4</td>
-                                <td>5s</td>
-                            </tr>
-                            <tr>
-                                <td>r</td>
-                                <td>4</td>
-                                <td>5s</td>
-                            </tr>
-                            <tr>
-                                <td>r</td>
-                                <td>4</td>
-                                <td>5s</td>
-                            </tr>
-                        </tbody>
-                    </table>
-               
-            </div> -->
+            <button class="btn btn-primary btn-rounded" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-whatever="@mdo"> Ajouter</button>
 
             <mat-form-field style="margin-top: 10px;">
               <mat-label>Recheche</mat-label>
@@ -204,9 +173,9 @@
 
                 <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
-                  <td mat-cell *matCellDef="let row" style="width: 200px">
-                    <i class="fas fa-eye fa-lg text-success mr-2" ></i>
-                    <i class="fas fa-edit fa-lg text-info mr-2"></i>
+                  <td mat-cell *matCellDef="let row" style="width: 300px">
+                    <!-- <i class="fas fa-eye fa-lg text-success mr-2" ></i> -->
+                    <i class="fas fa-edit fa-lg text-success mr-2"></i>
                     <i class="fas fa-trash-alt fa-lg text-danger" ></i>
                   </td>
                 </ng-container>
@@ -217,7 +186,7 @@
             
                 <!-- Row shown when there is no matching data. -->
                 <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="11">No data matching the filter "{{input.value}}"</td>
+                  <td class="mat-cell" colspan="11">Aucune donnée "{{input.value}}"</td>
                 </tr>
 
               </table>
@@ -225,6 +194,74 @@
               <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
             </div>
           
+
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Nouvelle Information</h5> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="row g-3">
+                        <div class="col-auto">
+                          <label  class="col-form-label">Nom</label>
+                          <input type="text" class="form-control"  formControlName="nom">
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Postnom</label>
+                          <input type="text" class="form-control"  formControlName="postnom">
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Prenom</label>
+                          <input type="text" class="form-control"  formControlName="prenom">
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Lieu de naissance</label>
+                          <input type="text" class="form-control"  formControlName="lieu">
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Date de naissance</label>
+                          <input type="date" class="form-control"  formControlName="date">
+                        </div>
+                        <div class="col-auto">
+                          <label  class="col-form-label">Etat civil</label>
+                          <select class="form-control" formControlName="etat" >
+                              <option>Celibataire</option>
+                              <option>Marié(e)</option>
+                          </select>
+                        </div>
+                        <div class="col-auto">
+                          <label  class="col-form-label">Sexe</label>
+                          <select class="form-control" formControlName="sexe" >
+                              <option>M</option>
+                              <option>F</option>
+                          </select>
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Telephone</label>
+                          <input type="number" class="form-control"  formControlName="telephone">
+                        </div>
+                        <div class="col-auto">
+                          <label class="col-form-label">Adresse</label>
+                          <input type="text" class="form-control"  formControlName="adresse">
+                        </div>
+                        
+                      </div>
+                      
+                      <div class="modal-footer">
+                        <!-- data-bs-dismiss="modal" -->
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Ajouter</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
           
         </div>
         <!-- content-wrapper ends -->

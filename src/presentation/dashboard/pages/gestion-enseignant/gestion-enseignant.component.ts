@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -18,17 +19,19 @@ export class GestionEnseignantComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'nom', 'postnom', 'prenom', 'lieu', 'date', 'etat', 'sexe', 'telephone', 'adresse', 'actions'];
   dataSource!: MatTableDataSource<EnseignantEntity>;
+  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   
-  constructor(private auth:AuthService, private dialog:MatDialog, private crud:ReadEnseignantUseCase, private http:HttpClient){
+  constructor(private auth:AuthService, private dialog:MatDialog, 
+    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, ){
   }
 
   ngOnInit(): void {
 
-      this.crud.execute().subscribe(res=>{
+      this.crudRead.execute().subscribe(res=>{
         console.log(res)
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
@@ -52,6 +55,15 @@ export class GestionEnseignantComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  updateData(){
+
+  }
+
+  addData(){
+
   }
 }
 

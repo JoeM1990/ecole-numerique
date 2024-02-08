@@ -5,8 +5,8 @@ import { ErrorComponent } from "src/presentation/dialog/error/error.component";
 import { UserLoginUseCase } from "./user-login.usecase";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import {CookieService} from 'ngx-cookie-service';
-import {NgxSecureCookieService} from 'ngx-secure-cookie'
+
+import { NgxEncryptCookieService } from "ngx-encrypt-cookie";
 @Injectable({
     providedIn: 'root'
   })
@@ -15,10 +15,9 @@ export class AuthService {
     private isAuthenticated = false;
     key:any;
    
-    // this.cookie.set("test","test value",true,key);
 
     constructor(private router:Router, private dialog:MatDialog, private auth:UserLoginUseCase,
-        private cookieService: CookieService, private cookie:NgxSecureCookieService,) { }
+         private cookie:NgxEncryptCookieService,) { }
 
     login(email:any, password:any){
         this.auth.execute({email,password}).subscribe((res)=>{
@@ -43,7 +42,7 @@ export class AuthService {
 
     checkLogin():boolean{
         this.isAuthenticated = true;
-        return !! this.cookieService.get('token');
+        return !! this.cookie.get('token',false);
     }
 
     isAuthenticatedUser(): boolean {
@@ -51,8 +50,7 @@ export class AuthService {
     }
   
     logout(){
-        this.cookie.delete('token');
-        this.cookie.delete('key_app');
+        this.cookie.deleteAll()
         this.isAuthenticated = false;
         this.router.navigate(['/login']);
     }
