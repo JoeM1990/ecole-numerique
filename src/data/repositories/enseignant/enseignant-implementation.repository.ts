@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, map } from "rxjs";
 import { EnseignantModel } from "src/domain/models/enseignant.model";
 import { EnseignantEntity } from "./entities/enseignant-entity";
-import { NgxSecureCookieService } from "ngx-secure-cookie/lib/ngx-secure-cookie.service";
+import { NgxEncryptCookieService } from "ngx-encrypt-cookie";
 
 @Injectable({
     providedIn: 'root',
@@ -17,16 +17,16 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
     enseignantMapper = new EnseignantImplementationRepositoryMapper();
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookie:NgxEncryptCookieService) {
         super();
     }
 
     create(enseignant:EnseignantModel): Observable<any> {
 
-        // let key_app = this.cookie.get('key_app', false);
-        // let token = this.cookie.get('token', true, key_app);
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
         
-        let token='';
+       
 
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -39,10 +39,9 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
     read():Observable<any>{
 
-        // let key_app = this.cookie.get('key_app', false);
-        // let token = this.cookie.get('token', true, key_app);
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
         
-        let token='';
        
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -56,10 +55,10 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
     update(enseignant:EnseignantModel): Observable<any> {
 
-        // let key_app = this.cookie.get('key_app', false);
-        // let token = this.cookie.get('token', true, key_app);
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
         
-        let token='';
+     
         
 
         const  headers =  new HttpHeaders();
@@ -74,10 +73,10 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
     delete(enseignant:EnseignantModel): Observable<any> {
 
-        // let key_app = this.cookie.get('key_app', false);
-        // let token = this.cookie.get('token', true, key_app);
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
         
-        let token='';
+ 
        
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');

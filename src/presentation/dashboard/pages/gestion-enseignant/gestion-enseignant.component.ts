@@ -24,12 +24,12 @@ export class GestionEnseignantComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   
-  constructor(private auth:AuthService, private dialog:MatDialog, private crud:ReadEnseignantUseCase, private http:HttpClient){
+  constructor(private auth:AuthService, private dialog:MatDialog, private crudRead:ReadEnseignantUseCase, private http:HttpClient){
   }
 
   ngOnInit(): void {
 
-      this.crud.execute().subscribe(res=>{
+      this.crudRead.execute().subscribe(res=>{
         console.log(res)
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;

@@ -34,6 +34,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { NgxSecureCookieService } from 'ngx-secure-cookie';
 
 
 
@@ -75,9 +76,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSortModule,
     MatTableModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
-  providers: [],
+  providers: [
+    NgxSecureCookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
