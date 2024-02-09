@@ -91,7 +91,7 @@ export class GestionEnseignantComponent implements OnInit{
 
 
   getDataById(id:any){
-    this.getDataById(id)
+    
   }
 
   updateData(){
