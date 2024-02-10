@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
+import { GetEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,9 +25,40 @@ export class GestionEnseignantComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  public enseignantForm: FormGroup;
+  public updateenseignantForm: FormGroup;
+
+  enseignant:any;
+  enseignantGet:any;
+
   
   constructor(private auth:AuthService, private dialog:MatDialog, 
-    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, ){
+    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, getEnseignant:GetEnseignantByIdUseCase){
+      this.enseignantForm = this.formBuilder.group({
+        id:null,
+        nom: ['', [Validators.required], ],
+        postnom: ['', [Validators.required], ],
+        prenom: ['', [Validators.required], ],
+        lieu: ['', [Validators.required], ],
+        date: ['', [Validators.required], ],
+        etat: ['', [Validators.required], ],
+        sexe: ['', [Validators.required], ],
+        telephone: ['', [Validators.required], ],
+        adresse: ['', [Validators.required], ],
+      });
+
+
+      this.updateenseignantForm = this.formBuilder.group({
+        nom: ['', [Validators.required], ],
+        postnom: ['', [Validators.required], ],
+        prenom: ['', [Validators.required], ],
+        lieu: ['', [Validators.required], ],
+        date: ['', [Validators.required], ],
+        etat: ['', [Validators.required], ],
+        sexe: ['', [Validators.required], ],
+        telephone: ['', [Validators.required], ],
+        adresse: ['', [Validators.required], ],
+      });
   }
 
   ngOnInit(): void {
@@ -57,6 +89,10 @@ export class GestionEnseignantComponent implements OnInit{
     }
   }
 
+
+  getDataById(id:any){
+    
+  }
 
   updateData(){
 
