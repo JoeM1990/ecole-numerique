@@ -4,7 +4,7 @@ import { EnseignantEntity } from "src/data/repositories/enseignant/entities/ense
 import { EnseignantModel } from "../models/enseignant.model";
 import { EnseignantRepository } from "../repositories/enseignant.repository";
 
-export class GetEnseignantByIdUseCase implements UseCase<void, EnseignantModel> {
+export class ReadEnseignantByIdUseCase implements UseCase<void, EnseignantModel> {
 
     constructor(private enseignantRepository: EnseignantRepository) { }
 

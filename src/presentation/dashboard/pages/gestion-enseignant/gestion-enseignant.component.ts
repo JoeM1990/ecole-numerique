@@ -6,7 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
-import { GetEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
+import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -33,7 +33,7 @@ export class GestionEnseignantComponent implements OnInit{
 
   
   constructor(private auth:AuthService, private dialog:MatDialog, 
-    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, getEnseignant:GetEnseignantByIdUseCase){
+    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder, getById:ReadEnseignantByIdUseCase){
       this.enseignantForm = this.formBuilder.group({
         id:null,
         nom: ['', [Validators.required], ],

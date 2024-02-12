@@ -10,6 +10,7 @@ import { EnseignantRepository } from 'src/domain/repositories/enseignant.reposit
 import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
 import { EnseignantImplementationRepository } from './repositories/enseignant/enseignant-implementation.repository';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
+import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
 
 
@@ -55,6 +56,14 @@ const readEnseigantUseCaseFactory =
         deps: [EnseignantRepository],
     };
 
+const readEnseigantByIdUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new ReadEnseignantByIdUseCase(enseigantRepo);
+    export const readEnseigantByIdUseCaseProvider = {
+        provide: ReadEnseignantUseCase,
+        useFactory: readEnseigantByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
 
 @NgModule({
     providers: [
@@ -63,6 +72,7 @@ const readEnseigantUseCaseFactory =
         getUserProfileUseCaseProvider,
         createEnseigantUseCaseProvider,
         readEnseigantUseCaseProvider,
+        readEnseigantByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
         { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
     ],
