@@ -47,7 +47,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
-        console.log(headers.get('x-access-token'))
+        console.log(headers.get('x-access-token')+'token')
 
 
         return this.http
