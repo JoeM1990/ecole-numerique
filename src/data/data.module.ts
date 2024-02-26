@@ -12,6 +12,7 @@ import { EnseignantImplementationRepository } from './repositories/enseignant/en
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
 import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
+import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
 
 
 
@@ -59,7 +60,15 @@ const readEnseigantUseCaseFactory =
 const readEnseigantByIdUseCaseFactory = 
     (enseigantRepo: EnseignantRepository) => new ReadEnseignantByIdUseCase(enseigantRepo);
     export const readEnseigantByIdUseCaseProvider = {
-        provide: ReadEnseignantUseCase,
+        provide: ReadEnseignantByIdUseCase,
+        useFactory: readEnseigantByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+const deleteEnseigantByIdUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new DeleteEnseignantByIdUseCase(enseigantRepo);
+    export const deleteEnseigantByIdUseCaseProvider = {
+        provide: DeleteEnseignantByIdUseCase,
         useFactory: readEnseigantByIdUseCaseFactory,
         deps: [EnseignantRepository],
     };
@@ -73,6 +82,7 @@ const readEnseigantByIdUseCaseFactory =
         createEnseigantUseCaseProvider,
         readEnseigantUseCaseProvider,
         readEnseigantByIdUseCaseProvider,
+        deleteEnseigantByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
         { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
     ],
