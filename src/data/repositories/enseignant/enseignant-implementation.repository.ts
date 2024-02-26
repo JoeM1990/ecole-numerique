@@ -43,14 +43,13 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         let token = this.cookie.get('token', true, key_app);
         
        
-        // const  headers =  new HttpHeaders();
-        // headers.set('Content-Type', 'application/json; charset=utf-8');
-        // headers.set('x-access-token',  token);
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
 
-        // console.log(headers.get('x-access-token')+'token');
-        console.log('token :'+token);
-        console.log('key app :'+key_app);
-
+        console.log(headers.get('x-access-token')+'token');
+        // console.log('token :'+token);
+        // console.log('key app :'+key_app);
 
         return this.http
             .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: {
@@ -118,6 +117,23 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
                 'x-access-token':  token
             }})
            
+    }
+
+    deleteById(id:any): Observable<any> {
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+        
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token', token);
+
+
+        return this.http
+            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+id, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})     
     }
 
     

@@ -31,7 +31,6 @@ export class GestionEnseignantComponent implements OnInit{
   enseignant:any;
   enseignantGet:any;
 
-  
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
     ){
@@ -47,7 +46,6 @@ export class GestionEnseignantComponent implements OnInit{
         telephone: ['', [Validators.required], ],
         adresse: ['', [Validators.required], ],
       });
-
 
       this.updateenseignantForm = this.formBuilder.group({
         nom: ['', [Validators.required], ],
@@ -65,12 +63,12 @@ export class GestionEnseignantComponent implements OnInit{
   ngOnInit(): void {
 
       this.crudRead.execute().subscribe(res=>{
-        console.log(res)
+        // console.log(res)
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-      
+
   }
 
   logout(){

@@ -7,5 +7,5 @@ export abstract class EnseignantRepository {
     abstract readById(id:any):any;
     abstract update(enseigant:EnseignantModel): Observable<EnseignantModel>;
     abstract delete(enseigant:EnseignantModel): Observable<EnseignantModel>;
-   
+    abstract deleteById(id:any): any;
 }
