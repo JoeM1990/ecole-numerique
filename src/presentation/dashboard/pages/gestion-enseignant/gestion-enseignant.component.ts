@@ -10,6 +10,8 @@ import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-by
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
+import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -32,7 +34,8 @@ export class GestionEnseignantComponent implements OnInit{
   enseignantGet:any;
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
-    private crudRead:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
+    private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
+    private create:CreateEnseignantUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -62,7 +65,7 @@ export class GestionEnseignantComponent implements OnInit{
 
   ngOnInit(): void {
 
-      this.crudRead.execute().subscribe(res=>{
+      this.read.execute().subscribe(res=>{
         // console.log(res)
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
@@ -99,7 +102,16 @@ export class GestionEnseignantComponent implements OnInit{
   }
 
   addData(){
-
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter un enseignant?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+        if(this.enseignantForm.valid){
+          this.create.execute(this.enseignantForm.value);
+        }else{
+          this.dialog.open(ErrorComponent,{data:"Le formulaire est mal remplis"});
+        }
+      }
+    })
   }
 }
 
