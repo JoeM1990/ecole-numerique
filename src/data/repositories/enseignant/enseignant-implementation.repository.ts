@@ -33,7 +33,10 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('x-access-token',  token);
 
         return this.http
-            .post<EnseignantEntity>(this.baseUrl+'enseigant', enseignant, {headers: headers})
+            .post<EnseignantEntity>(this.baseUrl+'enseignant', enseignant,{headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
            
     }
 
@@ -47,7 +50,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
-        console.log(headers.get('x-access-token')+'token');
+        // console.log(headers.get('x-access-token')+'token');
         // console.log('token :'+token);
         // console.log('key app :'+key_app);
 
@@ -69,7 +72,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
-        console.log(headers.get('x-access-token'))
+        // console.log(headers.get('x-access-token'))
 
 
         return this.http
@@ -92,7 +95,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .put<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, enseignant, {headers: {
+            .put<EnseignantEntity>(this.baseUrl+'enseignant/'+enseignant.id, enseignant, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
@@ -112,7 +115,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+enseignant.id, {headers: {
+            .delete<EnseignantEntity>(this.baseUrl+'enseignant/'+enseignant.id, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
@@ -130,7 +133,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseigant/'+id, {headers: {
+            .delete<EnseignantEntity>(this.baseUrl+'enseignant/'+id, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})     

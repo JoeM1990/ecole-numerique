@@ -64,13 +64,16 @@ export class GestionEnseignantComponent implements OnInit{
   }
 
   ngOnInit(): void {
+      this.readData();
+  }
 
-      this.read.execute().subscribe(res=>{
-        // console.log(res)
-        this.dataSource = new MatTableDataSource(res)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+  readData(){
+    this.read.execute().subscribe(res=>{
+      // console.log(res)
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
 
   }
 
@@ -105,11 +108,10 @@ export class GestionEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter un enseignant?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        if(this.enseignantForm.valid){
-          this.create.execute(this.enseignantForm.value);
-        }else{
-          this.dialog.open(ErrorComponent,{data:"Le formulaire est mal remplis"});
-        }
+          this.create.execute(this.enseignantForm.value).subscribe(val=>{
+            console.log(val);
+          });
+          //onsole.log(this.enseignantForm.value)
       }
     })
   }
