@@ -15,7 +15,6 @@ export class AuthService {
     private isAuthenticated = false;
     key:any;
    
-
     constructor(private router:Router, private dialog:MatDialog, private auth:UserLoginUseCase,
          private cookie:NgxEncryptCookieService,) { }
 

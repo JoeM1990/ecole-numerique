@@ -108,7 +108,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
 
-            <button class="btn btn-primary btn-rounded" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-whatever="@mdo"> Ajouter</button>
+            <button type="button" class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#addModal" data-whatever="@mdo"> Ajouter</button>
 
             <mat-form-field style="margin-top: 10px;">
               <mat-label>Recheche</mat-label>
@@ -193,72 +193,71 @@
             
               <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
             </div>
-          
 
-            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="">
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="" role="dialog">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <!-- <h5 class="modal-title" id="exampleModalLabel">Nouvelle Information</h5> -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                   </div>
                   <div class="modal-body">
                     <form [formGroup]="enseignantForm">
                       <div class="row g-3">
                         <div class="col-auto">
                           <label  class="col-form-label">Nom</label>
-                          <input type="text" class="form-control"  formControlName="nom">
+                          <input type="text" class="form-control"  formControlName="nom" required>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Postnom</label>
-                          <input type="text" class="form-control"  formControlName="postnom">
+                          <input type="text" class="form-control"  formControlName="postnom" required>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Prenom</label>
-                          <input type="text" class="form-control"  formControlName="prenom">
+                          <input type="text" class="form-control"  formControlName="prenom" required>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Lieu de naissance</label>
-                          <input type="text" class="form-control"  formControlName="lieu">
+                          <input type="text" class="form-control"  formControlName="lieu" required>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Date de naissance</label>
-                          <input type="date" class="form-control"  formControlName="date">
+                          <input type="date" class="form-control"  formControlName="date" required>
                         </div>
                         <div class="col-auto">
                           <label  class="col-form-label">Etat civil</label>
-                          <select class="form-control" formControlName="etat" >
+                          <select class="form-control" formControlName="etat" required>
                               <option>Celibataire</option>
                               <option>Marié(e)</option>
                           </select>
                         </div>
                         <div class="col-auto">
                           <label  class="col-form-label">Sexe</label>
-                          <select class="form-control" formControlName="sexe" >
+                          <select class="form-control" formControlName="sexe"  required>
                               <option>M</option>
                               <option>F</option>
                           </select>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Telephone</label>
-                          <input type="number" class="form-control"  formControlName="telephone">
+                          <input type="number" class="form-control"  formControlName="telephone" required>
                         </div>
                         <div class="col-auto">
                           <label class="col-form-label">Adresse</label>
-                          <input type="text" class="form-control"  formControlName="adresse">
+                          <input type="text" class="form-control"  formControlName="adresse" required>
                         </div>
                         
                       </div>
                       
                       <div class="modal-footer">
                         <!-- data-bs-dismiss="modal" -->
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Ajouter</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addData()">Ajouter</button>
                       </div>
                       
                     </form>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
