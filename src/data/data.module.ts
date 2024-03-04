@@ -16,6 +16,11 @@ import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseigna
 import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
 import { PresenceRepository } from 'src/domain/repositories/presence.repository';
 import { PresenceImplementationRepository } from './repositories/presence/presence-implementation.repository';
+import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
+import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
+import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
+import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
+import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
 
 
 
@@ -90,6 +95,47 @@ const updateEnseigantByIdUseCaseFactory =
 
 //For presence
 
+const createPresenceUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new CreatePresenceUseCase(presenceRepo);
+    export const createPresenceUseCaseProvider = {
+        provide: CreatePresenceUseCase,
+        useFactory: createPresenceUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const readPresenceUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new ReadPresenceUseCase(presenceRepo);
+    export const readPresenceUseCaseProvider = {
+        provide: ReadPresenceUseCase,
+        useFactory: readPresenceUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const readPresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new ReadPresenceByIdUseCase(presenceRepo);
+    export const readPresenceByIdUseCaseProvider = {
+        provide: ReadPresenceByIdUseCase,
+        useFactory: readPresenceByIdUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const deletePresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new DeletePresenceByIdUseCase(presenceRepo);
+    export const deletePresenceByIdUseCaseProvider = {
+        provide: DeletePresenceByIdUseCase,
+        useFactory: deletePresenceByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+
+const updatePresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new UpdatePresenceUseCase(presenceRepo);
+    export const updatePresenceUseCaseProvider = {
+        provide: UpdatePresenceUseCase,
+        useFactory: updatePresenceByIdUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
 
 @NgModule({
     providers: [
@@ -101,6 +147,11 @@ const updateEnseigantByIdUseCaseFactory =
         readEnseigantByIdUseCaseProvider,
         updateEnseigantUseCaseProvider,
         deleteEnseigantByIdUseCaseProvider,
+        createPresenceUseCaseProvider,
+        readPresenceUseCaseProvider,
+        readPresenceByIdUseCaseProvider,
+        updatePresenceUseCaseProvider,
+        deletePresenceByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
         { provide: EnseignantRepository, useClass:EnseignantImplementationRepository},
         { provide: PresenceRepository, useClass:PresenceImplementationRepository}
