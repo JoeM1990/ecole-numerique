@@ -39,6 +39,7 @@ export class PresenceEnseignantComponent implements OnInit{
         date: ['', [Validators.required], ],
         heureA: ['', [Validators.required], ],
         heureS: ['', [Validators.required], ],
+        categorie: 'enseignant'
       });
 
       this.updatepresenceForm = this.formBuilder.group({
@@ -47,6 +48,7 @@ export class PresenceEnseignantComponent implements OnInit{
         date: ['', [Validators.required], ],
         heureA: ['', [Validators.required], ],
         heureS: ['', [Validators.required], ],
+        categorie: 'enseignant'
       });
   }
 
