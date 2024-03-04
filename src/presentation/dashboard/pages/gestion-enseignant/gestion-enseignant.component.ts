@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -36,7 +37,7 @@ export class GestionEnseignantComponent implements OnInit{
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
-    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase
+    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase, private update:UpdateEnseignantUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -52,6 +53,7 @@ export class GestionEnseignantComponent implements OnInit{
       });
 
       this.updateenseignantForm = this.formBuilder.group({
+        id:null,
         nom: ['', [Validators.required], ],
         postnom: ['', [Validators.required], ],
         prenom: ['', [Validators.required], ],
@@ -103,6 +105,7 @@ export class GestionEnseignantComponent implements OnInit{
 
     this.getId.execute(id).subscribe(res=>{
       this.updateenseignantForm = this.formBuilder.group({
+        id: res.id,
         nom: res.nom,
         postnom: res.postnom,
         prenom: res.prenom,
@@ -114,13 +117,17 @@ export class GestionEnseignantComponent implements OnInit{
         adresse: res.adresse,
       });
     })
+
+    
   }
 
   updateData(){
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous modifier cet enseignant?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-    
+        this.update.execute(this.updateenseignantForm.value).subscribe(val=>{
+          this.readData();
+        })
       }
     })
   }

@@ -13,6 +13,7 @@ import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.useca
 import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
 import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
 
 
 
@@ -74,6 +75,15 @@ const deleteEnseigantByIdUseCaseFactory =
     };
 
 
+const updateEnseigantByIdUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new UpdateEnseignantUseCase(enseigantRepo);
+    export const updateEnseigantUseCaseProvider = {
+        provide: UpdateEnseignantUseCase,
+        useFactory: updateEnseigantByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+
 @NgModule({
     providers: [
         userLoginUseCaseProvider,
@@ -83,6 +93,7 @@ const deleteEnseigantByIdUseCaseFactory =
         readEnseigantUseCaseProvider,
         readEnseigantByIdUseCaseProvider,
         deleteEnseigantByIdUseCaseProvider,
+        updateEnseigantUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
         { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
     ],
