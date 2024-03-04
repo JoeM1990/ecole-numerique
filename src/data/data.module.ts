@@ -13,6 +13,14 @@ import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.useca
 import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
 import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
+import { PresenceRepository } from 'src/domain/repositories/presence.repository';
+import { PresenceImplementationRepository } from './repositories/presence/presence-implementation.repository';
+import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
+import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
+import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
+import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
+import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
 
 
 
@@ -40,6 +48,8 @@ const getUserProfileUseCaseFactory =
         deps: [UserRepository],
     };
 
+
+//For teacher
 
 const createEnseigantUseCaseFactory = 
     (enseigantRepo: EnseignantRepository) => new CreateEnseignantUseCase(enseigantRepo);
@@ -69,8 +79,61 @@ const deleteEnseigantByIdUseCaseFactory =
     (enseigantRepo: EnseignantRepository) => new DeleteEnseignantByIdUseCase(enseigantRepo);
     export const deleteEnseigantByIdUseCaseProvider = {
         provide: DeleteEnseignantByIdUseCase,
-        useFactory: readEnseigantByIdUseCaseFactory,
+        useFactory: deleteEnseigantByIdUseCaseFactory,
         deps: [EnseignantRepository],
+    };
+
+
+const updateEnseigantByIdUseCaseFactory = 
+    (enseigantRepo: EnseignantRepository) => new UpdateEnseignantUseCase(enseigantRepo);
+    export const updateEnseigantUseCaseProvider = {
+        provide: UpdateEnseignantUseCase,
+        useFactory: updateEnseigantByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+
+//For presence
+
+const createPresenceUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new CreatePresenceUseCase(presenceRepo);
+    export const createPresenceUseCaseProvider = {
+        provide: CreatePresenceUseCase,
+        useFactory: createPresenceUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const readPresenceUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new ReadPresenceUseCase(presenceRepo);
+    export const readPresenceUseCaseProvider = {
+        provide: ReadPresenceUseCase,
+        useFactory: readPresenceUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const readPresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new ReadPresenceByIdUseCase(presenceRepo);
+    export const readPresenceByIdUseCaseProvider = {
+        provide: ReadPresenceByIdUseCase,
+        useFactory: readPresenceByIdUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
+const deletePresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new DeletePresenceByIdUseCase(presenceRepo);
+    export const deletePresenceByIdUseCaseProvider = {
+        provide: DeletePresenceByIdUseCase,
+        useFactory: deletePresenceByIdUseCaseFactory,
+        deps: [EnseignantRepository],
+    };
+
+
+const updatePresenceByIdUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new UpdatePresenceUseCase(presenceRepo);
+    export const updatePresenceUseCaseProvider = {
+        provide: UpdatePresenceUseCase,
+        useFactory: updatePresenceByIdUseCaseFactory,
+        deps: [PresenceRepository],
     };
 
 
@@ -82,9 +145,16 @@ const deleteEnseigantByIdUseCaseFactory =
         createEnseigantUseCaseProvider,
         readEnseigantUseCaseProvider,
         readEnseigantByIdUseCaseProvider,
+        updateEnseigantUseCaseProvider,
         deleteEnseigantByIdUseCaseProvider,
+        createPresenceUseCaseProvider,
+        readPresenceUseCaseProvider,
+        readPresenceByIdUseCaseProvider,
+        updatePresenceUseCaseProvider,
+        deletePresenceByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
-        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
+        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository},
+        { provide: PresenceRepository, useClass:PresenceImplementationRepository}
     ],
     imports: [
         CommonModule,

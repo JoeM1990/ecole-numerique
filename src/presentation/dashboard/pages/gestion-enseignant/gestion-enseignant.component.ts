@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
+import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -32,10 +34,12 @@ export class GestionEnseignantComponent implements OnInit{
 
   enseignant:any;
   enseignantGet:any;
+  idEnseignant:any;
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
-    private create:CreateEnseignantUseCase
+    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase, private update:UpdateEnseignantUseCase,
+    private deleteE:DeleteEnseignantByIdUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -51,6 +55,7 @@ export class GestionEnseignantComponent implements OnInit{
       });
 
       this.updateenseignantForm = this.formBuilder.group({
+        id:null,
         nom: ['', [Validators.required], ],
         postnom: ['', [Validators.required], ],
         prenom: ['', [Validators.required], ],
@@ -98,23 +103,65 @@ export class GestionEnseignantComponent implements OnInit{
 
   getDataById(id:any){
 
+    this.idEnseignant = id;
+
+    this.getId.execute(id).subscribe(res=>{
+      this.updateenseignantForm = this.formBuilder.group({
+        id: res.id,
+        nom: res.nom,
+        postnom: res.postnom,
+        prenom: res.prenom,
+        lieu: res.lieu,
+        date: res.date,
+        etat: res.etat,
+        sexe: res.sexe,
+        telephone: res.telephone,
+        adresse: res.adresse,
+      });
+    })
+
+    
   }
 
   updateData(){
-
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous modifier cet enseignant?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+        this.update.execute(this.updateenseignantForm.value).subscribe(val=>{
+          this.readData();
+        })
+      }
+    })
   }
+  
 
   addData(){
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter un enseignant?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
           this.create.execute(this.enseignantForm.value).subscribe(val=>{
-            console.log(val);
+            // console.log(val);
+            this.readData();
           });
           //onsole.log(this.enseignantForm.value)
       }
     })
   }
+
+  deleteData(id:any){
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous supprimer cet enseignant?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+        this.deleteE.execute(id).subscribe(val=>{
+          this.readData();
+        })
+      }
+    })
+  }
+
+
 }
+
+
 
 
