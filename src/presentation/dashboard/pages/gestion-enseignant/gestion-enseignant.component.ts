@@ -32,10 +32,11 @@ export class GestionEnseignantComponent implements OnInit{
 
   enseignant:any;
   enseignantGet:any;
+  idEnseignant:any;
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
-    private create:CreateEnseignantUseCase
+    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -98,18 +99,40 @@ export class GestionEnseignantComponent implements OnInit{
 
   getDataById(id:any){
 
+    this.idEnseignant = id;
+
+    this.getId.execute(id).subscribe(res=>{
+      this.updateenseignantForm = this.formBuilder.group({
+        nom: res.nom,
+        postnom: res.postnom,
+        prenom: res.prenom,
+        lieu: res.lieu,
+        date: res.date,
+        etat: res.etat,
+        sexe: res.sexe,
+        telephone: res.telephone,
+        adresse: res.adresse,
+      });
+    })
   }
 
   updateData(){
-
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous modifier cet enseignant?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+    
+      }
+    })
   }
+  
 
   addData(){
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter un enseignant?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
           this.create.execute(this.enseignantForm.value).subscribe(val=>{
-            console.log(val);
+            // console.log(val);
+            this.readData();
           });
           //onsole.log(this.enseignantForm.value)
       }
