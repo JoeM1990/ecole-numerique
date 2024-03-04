@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
 import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
+import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -37,7 +38,8 @@ export class GestionEnseignantComponent implements OnInit{
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
-    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase, private update:UpdateEnseignantUseCase
+    private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase, private update:UpdateEnseignantUseCase,
+    private deleteE:DeleteEnseignantByIdUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -145,6 +147,21 @@ export class GestionEnseignantComponent implements OnInit{
       }
     })
   }
+
+  deleteData(id:any){
+    let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous supprimer cet enseignant?'});
+    refDialog.afterClosed().subscribe(res=>{
+      if(res == 'true'){
+        this.deleteE.execute(id).subscribe(val=>{
+          this.readData();
+        })
+      }
+    })
+  }
+
+
 }
+
+
 
 

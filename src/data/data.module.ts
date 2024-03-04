@@ -70,7 +70,7 @@ const deleteEnseigantByIdUseCaseFactory =
     (enseigantRepo: EnseignantRepository) => new DeleteEnseignantByIdUseCase(enseigantRepo);
     export const deleteEnseigantByIdUseCaseProvider = {
         provide: DeleteEnseignantByIdUseCase,
-        useFactory: readEnseigantByIdUseCaseFactory,
+        useFactory: deleteEnseigantByIdUseCaseFactory,
         deps: [EnseignantRepository],
     };
 
@@ -92,8 +92,8 @@ const updateEnseigantByIdUseCaseFactory =
         createEnseigantUseCaseProvider,
         readEnseigantUseCaseProvider,
         readEnseigantByIdUseCaseProvider,
-        deleteEnseigantByIdUseCaseProvider,
         updateEnseigantUseCaseProvider,
+        deleteEnseigantByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
         { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
     ],
