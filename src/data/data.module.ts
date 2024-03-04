@@ -14,6 +14,8 @@ import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-by
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
 import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
 import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
+import { PresenceRepository } from 'src/domain/repositories/presence.repository';
+import { PresenceImplementationRepository } from './repositories/presence/presence-implementation.repository';
 
 
 
@@ -41,6 +43,8 @@ const getUserProfileUseCaseFactory =
         deps: [UserRepository],
     };
 
+
+//For teacher
 
 const createEnseigantUseCaseFactory = 
     (enseigantRepo: EnseignantRepository) => new CreateEnseignantUseCase(enseigantRepo);
@@ -84,6 +88,9 @@ const updateEnseigantByIdUseCaseFactory =
     };
 
 
+//For presence
+
+
 @NgModule({
     providers: [
         userLoginUseCaseProvider,
@@ -95,7 +102,8 @@ const updateEnseigantByIdUseCaseFactory =
         updateEnseigantUseCaseProvider,
         deleteEnseigantByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
-        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository}
+        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository},
+        { provide: PresenceRepository, useClass:PresenceImplementationRepository}
     ],
     imports: [
         CommonModule,
