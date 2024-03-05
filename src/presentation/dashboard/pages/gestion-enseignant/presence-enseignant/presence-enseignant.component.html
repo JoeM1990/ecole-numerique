@@ -107,7 +107,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <button type="button" class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#addModal" data-whatever="@mdo"> Ajouter</button>
+          <button type="button" class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#addModal" data-whatever="@mdo"> Ajouter</button> <br>
 
             <mat-form-field style="margin-top: 10px;">
               <mat-label>Recheche</mat-label>
@@ -134,12 +134,12 @@
                   <td mat-cell *matCellDef="let row"> {{row.date}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="prenom">
+                <ng-container matColumnDef="heureA">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Heure arrivé</th>
                   <td mat-cell *matCellDef="let row"> {{row.heureA}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="lieu">
+                <ng-container matColumnDef="heureS">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Heure sotie</th>
                   <td mat-cell *matCellDef="let row"> {{row.heureS}} </td>
                 </ng-container>
@@ -169,6 +169,95 @@
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
+
+
+
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"  role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <form [formGroup]="presenceForm">
+                  <div class="row g-3">
+                    <div class="col-auto">
+                      <label  class="col-form-label">Noms</label>
+                      <!-- <input type="text" class="form-control"  formControlName="noms" required> -->
+                      <select class="form-control"  formControlName="noms">
+                        <option *ngFor="let enseignant of enseignantGet"> {{enseignant.nom}} {{enseignant.postnom}} {{enseignant.prenom}} </option>
+                      </select>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Date</label>
+                      <input type="date" class="form-control"  formControlName="date" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Heure Arrivé</label>
+                      <input type="time" class="form-control"  formControlName="heureA" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Heure Sortie</label>
+                      <input type="time" class="form-control"  formControlName="heureS" required>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <!-- data-bs-dismiss="modal" -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addData()">Ajouter</button>
+                  </div>
+                  
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"  role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <form [formGroup]="updatepresenceForm">
+                  <div class="row g-3">
+                    <div class="col-auto">
+                      <label  class="col-form-label">Noms</label>
+                      <!-- <input type="text" class="form-control"  formControlName="noms" required> -->
+                      <select class="form-control"  formControlName="noms">
+                        <option *ngFor="let enseignant of enseignantGet"> {{enseignant.nom}} &nbsp; {{enseignant.postnom}} &nbsp; {{enseignant.prenom}} </option>
+                      </select>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Date</label>
+                      <input type="date" class="form-control"  formControlName="date" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Heure Arrivé</label>
+                      <input type="time" class="form-control"  formControlName="heureA" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Heure Sortie</label>
+                      <input type="time" class="form-control"  formControlName="heureS" required>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <!-- data-bs-dismiss="modal" -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="updateData()">Modifier</button>
+                  </div>
+                  
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
         <footer class="footer">
             <div class="card">
               <div class="card-body">

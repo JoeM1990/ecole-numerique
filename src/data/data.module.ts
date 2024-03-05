@@ -124,7 +124,7 @@ const deletePresenceByIdUseCaseFactory =
     export const deletePresenceByIdUseCaseProvider = {
         provide: DeletePresenceByIdUseCase,
         useFactory: deletePresenceByIdUseCaseFactory,
-        deps: [EnseignantRepository],
+        deps: [PresenceRepository],
     };
 
 

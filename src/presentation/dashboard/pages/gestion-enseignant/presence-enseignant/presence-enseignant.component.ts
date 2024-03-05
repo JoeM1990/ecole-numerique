@@ -4,8 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PresenceEntity } from 'src/data/repositories/presence/entities/presence-entity';
 import { AuthService } from 'src/domain/usecases/auth';
+import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
+import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
+import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
+import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
+import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
 import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/confirmation.component';
 
 @Component({
@@ -16,7 +22,7 @@ import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/conf
 export class PresenceEnseignantComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'noms', 'date' , 'heureA', 'heureS','actions'];
-  dataSource!: MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<PresenceEntity>;
   
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,7 +37,9 @@ export class PresenceEnseignantComponent implements OnInit{
   enseignantGet:any;
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
-    private read:ReadEnseignantUseCase, public formBuilder: FormBuilder,
+    private read:ReadEnseignantUseCase, public formBuilder: FormBuilder, private create:CreatePresenceUseCase,
+    private readPresence:ReadPresenceUseCase, private getById:ReadPresenceByIdUseCase, private update:UpdatePresenceUseCase, 
+    private deleteD:DeletePresenceByIdUseCase
     ){
       this.presenceForm = this.formBuilder.group({
         id:null,
@@ -54,17 +62,23 @@ export class PresenceEnseignantComponent implements OnInit{
 
   ngOnInit(): void {
       this.readDataEnseignant();
+      this.readData();
   }
 
   readDataEnseignant(){
     this.read.execute().subscribe(res=>{
       this.enseignantGet = res;
+      console.log(res);
     })
 
   }
 
   readData(){
-
+    this.readPresence.execute().subscribe(res=>{
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
 
   logout(){
@@ -90,6 +104,16 @@ export class PresenceEnseignantComponent implements OnInit{
 
     this.idPresence = id;
 
+    this.getById.execute(id).subscribe(res=>{
+      this.updatepresenceForm = this.formBuilder.group({
+        id:res.id,
+        noms: res.noms,
+        date: res.date,
+        heureA: res.heureA,
+        heureS: res.heureS,
+        categorie: res.categorie
+      });
+    })
     
   }
 
@@ -97,7 +121,9 @@ export class PresenceEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous modifier cette presence ?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        
+        this.update.execute(this.updatepresenceForm.value).subscribe(res=>{
+          this.readData();
+        })
       }
     })
   }
@@ -107,7 +133,9 @@ export class PresenceEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter cette presence ?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-          
+          this.create.execute(this.presenceForm.value).subscribe(res=>{
+            this.readData()
+          })
       }
     })
   }
@@ -116,7 +144,9 @@ export class PresenceEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous supprimer cette presence ?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        
+        this.deleteD.execute(id).subscribe(res=>{
+          this.readData();
+        })
       }
     })
   }
