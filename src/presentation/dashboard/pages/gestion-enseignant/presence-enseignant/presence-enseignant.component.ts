@@ -136,6 +136,7 @@ export class PresenceEnseignantComponent implements OnInit{
           this.create.execute(this.presenceForm.value).subscribe(res=>{
             this.readData()
           })
+          // console.log(this.presenceForm.value)
       }
     })
   }
