@@ -83,6 +83,28 @@ export class PresenceImplementationRepository extends PresenceRepository {
             
     }
 
+
+    readByName(categorie:any):Observable<any>{
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+        
+       
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
+
+        // console.log(headers.get('x-access-token'))
+
+
+        return this.http
+            .get<PresenceEntity>(this.baseUrl+'presence/?categorie='+categorie, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
+            
+    }
+
     update(presence:PresenceModel): Observable<any> {
 
         let key_app = this.cookie.get('key_app', false);
