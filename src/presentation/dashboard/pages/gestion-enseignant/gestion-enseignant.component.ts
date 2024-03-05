@@ -39,7 +39,7 @@ export class GestionEnseignantComponent implements OnInit{
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, private http:HttpClient, public formBuilder: FormBuilder,
     private create:CreateEnseignantUseCase, private getId:ReadEnseignantByIdUseCase, private update:UpdateEnseignantUseCase,
-    private deleteE:DeleteEnseignantByIdUseCase
+    private deleteD:DeleteEnseignantByIdUseCase
     ){
       this.enseignantForm = this.formBuilder.group({
         id:null,
@@ -152,7 +152,7 @@ export class GestionEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous supprimer cet enseignant?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        this.deleteE.execute(id).subscribe(val=>{
+        this.deleteD.execute(id).subscribe(val=>{
           this.readData();
         })
       }

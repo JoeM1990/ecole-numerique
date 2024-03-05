@@ -21,6 +21,7 @@ import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
 import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
 import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
 import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
+import { ReadPresenceByNameUseCase } from 'src/domain/usecases/read-presenceByName.usecase';
 
 
 
@@ -119,6 +120,15 @@ const readPresenceByIdUseCaseFactory =
         deps: [PresenceRepository],
     };
 
+
+const readPresenceByNameUseCaseFactory = 
+    (presenceRepo: PresenceRepository) => new ReadPresenceByNameUseCase(presenceRepo);
+    export const readPresenceByNameUseCaseProvider = {
+        provide: ReadPresenceByNameUseCase,
+        useFactory: readPresenceByNameUseCaseFactory,
+        deps: [PresenceRepository],
+    };
+
 const deletePresenceByIdUseCaseFactory = 
     (presenceRepo: PresenceRepository) => new DeletePresenceByIdUseCase(presenceRepo);
     export const deletePresenceByIdUseCaseProvider = {
@@ -150,6 +160,7 @@ const updatePresenceByIdUseCaseFactory =
         createPresenceUseCaseProvider,
         readPresenceUseCaseProvider,
         readPresenceByIdUseCaseProvider,
+        readPresenceByNameUseCaseProvider,
         updatePresenceUseCaseProvider,
         deletePresenceByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },

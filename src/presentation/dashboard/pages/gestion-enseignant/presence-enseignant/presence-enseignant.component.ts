@@ -9,10 +9,11 @@ import { AuthService } from 'src/domain/usecases/auth';
 import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
 import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
 import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
-import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
 import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
+import { ReadPresenceByNameUseCase } from 'src/domain/usecases/read-presenceByName.usecase';
 import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
 import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/confirmation.component';
+
 
 @Component({
   selector: 'app-presence-enseignant',
@@ -38,7 +39,7 @@ export class PresenceEnseignantComponent implements OnInit{
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
     private read:ReadEnseignantUseCase, public formBuilder: FormBuilder, private create:CreatePresenceUseCase,
-    private readPresence:ReadPresenceUseCase, private getById:ReadPresenceByIdUseCase, private update:UpdatePresenceUseCase, 
+    private readPresence:ReadPresenceByNameUseCase, private getById:ReadPresenceByIdUseCase, private update:UpdatePresenceUseCase, 
     private deleteD:DeletePresenceByIdUseCase
     ){
       this.presenceForm = this.formBuilder.group({
@@ -68,16 +69,18 @@ export class PresenceEnseignantComponent implements OnInit{
   readDataEnseignant(){
     this.read.execute().subscribe(res=>{
       this.enseignantGet = res;
-      console.log(res);
+      // console.log(res);
     })
 
   }
 
   readData(){
-    this.readPresence.execute().subscribe(res=>{
+    this.readPresence.execute('enseignant').subscribe(res=>{
       this.dataSource = new MatTableDataSource(res)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      
+      console.log(res);
     })
   }
 
