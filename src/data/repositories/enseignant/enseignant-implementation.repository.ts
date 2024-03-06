@@ -88,7 +88,6 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
         
-     
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);

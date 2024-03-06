@@ -80,7 +80,7 @@ export class PresenceEnseignantComponent implements OnInit{
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       
-      console.log(res);
+      // console.log(res);
     })
   }
 
