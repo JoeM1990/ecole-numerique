@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserRegisterUseCase } from 'src/domain/usecases/user-register.usecase';
+import { UserRegisterUseCase } from 'src/domain/usecases/user/user-register.usecase';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';

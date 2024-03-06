@@ -167,6 +167,95 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
           </div>
         </div>
+
+
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"  role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <form [formGroup]="financeForm">
+                  <div class="row g-3">
+                    <div class="col-auto">
+                      <label  class="col-form-label">Noms</label>
+                      <!-- <input type="text" class="form-control"  formControlName="noms" required> -->
+                      <select class="form-control"  formControlName="noms">
+                        <option *ngFor="let enseignant of enseignantGet">{{enseignant.nom}} {{enseignant.postnom}} {{enseignant.prenom}}</option>
+                      </select>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Montant</label>
+                      <input type="text" class="form-control"  formControlName="montant" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Motif</label>
+                      <input type="text" class="form-control"  formControlName="motif" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Date</label>
+                      <input type="date" class="form-control"  formControlName="date" required>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <!-- data-bs-dismiss="modal" -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addData()">Ajouter</button>
+                  </div>
+                  
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"  role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <form [formGroup]="updatefinanceForm">
+                  <div class="row g-3">
+                    <div class="col-auto">
+                      <label  class="col-form-label">Noms</label>
+                      <!-- <input type="text" class="form-control"  formControlName="noms" required> -->
+                      <select class="form-control"  formControlName="noms">
+                        <option *ngFor="let enseignant of enseignantGet">{{enseignant.nom}} {{enseignant.postnom}} {{enseignant.prenom}}</option>
+                      </select>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Montant</label>
+                      <input type="text" class="form-control"  formControlName="montant" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Motif</label>
+                      <input type="text" class="form-control"  formControlName="motif" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Date</label>
+                      <input type="date" class="form-control"  formControlName="date" required>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <!-- data-bs-dismiss="modal" -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="updateData()">Modifier</button>
+                  </div>
+                  
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
         <footer class="footer">

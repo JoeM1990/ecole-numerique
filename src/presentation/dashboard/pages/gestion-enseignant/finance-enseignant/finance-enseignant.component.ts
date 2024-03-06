@@ -5,6 +5,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/domain/usecases/auth';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/enseignant/read-enseignant.usecase';
+import { CreateFinanceUseCase } from 'src/domain/usecases/finance/create-finance.usecase';
+import { DeleteFinanceByIdUseCase } from 'src/domain/usecases/finance/delete-presenceById.usecase';
+import { ReadFinanceUseCase } from 'src/domain/usecases/finance/read-finance.usecase';
+import { ReadFinanceByIdUseCase } from 'src/domain/usecases/finance/read-financeById.usecase';
+import { UpdateFinanceUseCase } from 'src/domain/usecases/finance/update-finance.usecase';
 import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/confirmation.component';
 
 @Component({
@@ -29,7 +35,9 @@ export class FinanceEnseignantComponent implements OnInit{
   idFinance:any;
 
   constructor(private auth:AuthService, private dialog:MatDialog, 
-     public formBuilder: FormBuilder,
+     public formBuilder: FormBuilder, private create:CreateFinanceUseCase, private read:ReadFinanceUseCase,
+     private getEns:ReadEnseignantUseCase, private readById:ReadFinanceByIdUseCase, private update:UpdateFinanceUseCase,
+     private deleteD:DeleteFinanceByIdUseCase
     ){
       this.financeForm = this.formBuilder.group({
         id:null,
@@ -37,6 +45,7 @@ export class FinanceEnseignantComponent implements OnInit{
         montant: ['', [Validators.required], ],
         motif: ['', [Validators.required], ],
         date: ['', [Validators.required], ],
+        categorie: 'enseignant'
       });
 
       this.updatefinanceForm = this.formBuilder.group({
@@ -45,15 +54,27 @@ export class FinanceEnseignantComponent implements OnInit{
         montant: ['', [Validators.required], ],
         motif: ['', [Validators.required], ],
         date: ['', [Validators.required], ],
+        categorie: 'enseignant'
       });
   }
 
   ngOnInit(): void {
+    this.getEnseignant();
       this.readData();
   }
 
+  getEnseignant(){
+    this.getEns.execute().subscribe(res=>{
+      this.enseignantGet = res;
+    })
+  }
+
   readData(){
-    
+    this.read.execute().subscribe(res=>{
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
 
   logout(){
@@ -78,14 +99,25 @@ export class FinanceEnseignantComponent implements OnInit{
   getDataById(id:any){
 
     this.idFinance = id;
- 
+    this.readById.execute(id).subscribe(res=>{
+      this.updatefinanceForm = this.formBuilder.group({
+        id:res.id,
+        noms: res.noms,
+        montant: res.montant,
+        motif: res.motif,
+        date: res.date,
+        categorie: res.categorie
+      });
+    })
   }
 
   updateData(){
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous modifier cette information?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        
+        this.update.execute(this.updatefinanceForm.value).subscribe(res=>{
+          this.readData();
+        })
       }
     })
   }
@@ -95,7 +127,9 @@ export class FinanceEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous ajouter une information?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        
+        this.create.execute(this.financeForm.value).subscribe(res=>{
+          this.readData();
+        })
       }
     })
   }
@@ -104,7 +138,9 @@ export class FinanceEnseignantComponent implements OnInit{
     let refDialog = this.dialog.open(ConfirmationComponent, {data:'Voulez-vous supprimer cette information?'});
     refDialog.afterClosed().subscribe(res=>{
       if(res == 'true'){
-        
+        this.deleteD.execute(id).subscribe(res=>{
+          this.readData();
+        })
       }
     })
   }

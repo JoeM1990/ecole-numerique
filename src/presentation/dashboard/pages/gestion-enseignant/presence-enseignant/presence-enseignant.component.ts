@@ -6,12 +6,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PresenceEntity } from 'src/data/repositories/presence/entities/presence-entity';
 import { AuthService } from 'src/domain/usecases/auth';
-import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
-import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
-import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
-import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
-import { ReadPresenceByNameUseCase } from 'src/domain/usecases/read-presenceByName.usecase';
-import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
+import { CreatePresenceUseCase } from 'src/domain/usecases/presence/create-presence.usecase';
+import { DeletePresenceByIdUseCase } from 'src/domain/usecases/presence/delete-presenceById.usecase';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/enseignant/read-enseignant.usecase';
+import { ReadPresenceByIdUseCase } from 'src/domain/usecases/presence/read-presenceById.usecase';
+import { ReadPresenceByNameUseCase } from 'src/domain/usecases/presence/read-presenceByName.usecase';
+import { UpdatePresenceUseCase } from 'src/domain/usecases/presence/update-presence.usecase';
 import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/confirmation.component';
 
 
@@ -80,7 +80,7 @@ export class PresenceEnseignantComponent implements OnInit{
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       
-      console.log(res);
+      // console.log(res);
     })
   }
 

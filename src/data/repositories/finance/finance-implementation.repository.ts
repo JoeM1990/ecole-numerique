@@ -1,27 +1,28 @@
-import { Injectable } from "@angular/core";
-import { EnseignantRepository } from "src/domain/repositories/enseignant.repository";
-import { EnseignantImplementationRepositoryMapper } from "./mappers/enseignant-repository.mapper";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, map } from "rxjs";
-import { EnseignantModel } from "src/domain/models/enseignant.model";
-import { EnseignantEntity } from "./entities/enseignant-entity";
+import { Injectable } from "@angular/core";
 import { NgxEncryptCookieService } from "ngx-encrypt-cookie";
+import { Observable } from "rxjs";
+import { FinanceModel } from "src/domain/models/finance.model";
+import { FinanceRepository } from "src/domain/repositories/finance.repository";
+import { FinanceEntity } from "./entities/finance-entity";
+import { FinanceImplementationRepositoryMapper } from "./mappers/finance-repository.mapper";
 
 @Injectable({
     providedIn: 'root',
 })
-export class EnseignantImplementationRepository extends EnseignantRepository {
+export class FinanceImplementationRepository extends FinanceRepository {
+ 
 
     baseUrl='http://localhost:8080/api/';
     //baseUrl2='https://61a1077b6c3b400017e69b7c.mockapi.io/enseignant'
 
-    enseignantMapper = new EnseignantImplementationRepositoryMapper();
+    financeMapper = new FinanceImplementationRepositoryMapper();
 
     constructor(private http: HttpClient, private cookie:NgxEncryptCookieService) {
         super();
     }
 
-    create(enseignant:EnseignantModel): Observable<any> {
+    create(finance:FinanceModel): Observable<any> {
 
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
@@ -33,7 +34,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         headers.set('x-access-token',  token);
 
         return this.http
-            .post<EnseignantEntity>(this.baseUrl+'enseignant', enseignant,{headers: {
+            .post<FinanceEntity>(this.baseUrl+'finance', finance,{headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
@@ -55,7 +56,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
         // console.log('key app :'+key_app);
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'enseignant', {headers: {
+            .get<FinanceEntity>(this.baseUrl+'finance', {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
@@ -76,32 +77,54 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .get<EnseignantEntity>(this.baseUrl+'enseignant/'+id, {headers: {
+            .get<FinanceEntity>(this.baseUrl+'finance/'+id, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
             
     }
 
-    update(enseignant:EnseignantModel): Observable<any> {
+    readByName(categorie:any):Observable<any>{
 
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
         
+       
+        const  headers =  new HttpHeaders();
+        headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.set('x-access-token',  token);
+
+        // console.log(headers.get('x-access-token'))
+
+
+        return this.http
+            .get<FinanceEntity>(this.baseUrl+'finance/?categorie='+categorie, {headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'x-access-token':  token
+            }})
+            
+    }
+
+    update(finance:FinanceModel): Observable<any> {
+
+        let key_app = this.cookie.get('key_app', false);
+        let token = this.cookie.get('token', true, key_app);
+        
+     
         const  headers =  new HttpHeaders();
         headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.set('x-access-token',  token);
 
 
         return this.http
-            .put<EnseignantEntity>(this.baseUrl+'enseignant/'+enseignant.id, enseignant, {headers: {
+            .put<FinanceEntity>(this.baseUrl+'finance/'+finance.id, finance, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
             
     }
 
-    delete(enseignant:EnseignantModel): Observable<any> {
+    delete(finance:FinanceModel): Observable<any> {
 
         let key_app = this.cookie.get('key_app', false);
         let token = this.cookie.get('token', true, key_app);
@@ -114,7 +137,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseignant/'+enseignant.id, {headers: {
+            .delete<FinanceEntity>(this.baseUrl+'finance/'+finance.id, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})
@@ -132,7 +155,7 @@ export class EnseignantImplementationRepository extends EnseignantRepository {
 
 
         return this.http
-            .delete<EnseignantEntity>(this.baseUrl+'enseignant/'+id, {headers: {
+            .delete<FinanceEntity>(this.baseUrl+'finance/'+id, {headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'x-access-token':  token
             }})     
