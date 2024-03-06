@@ -5,15 +5,15 @@ import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/conf
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
-import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/enseignant/read-enseignant.usecase';
+import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/enseignant/get-enseignant-byId.usecase';
 import { EnseignantEntity } from 'src/data/repositories/enseignant/entities/enseignant-entity';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
+import { CreateEnseignantUseCase } from 'src/domain/usecases/enseignant/create-enseignant.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
-import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
-import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/enseignant/update-enseignant.usecase';
+import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/enseignant/delete-enseignantById.usecase';
 
 @Component({
   selector: 'app-gestion-enseignant',

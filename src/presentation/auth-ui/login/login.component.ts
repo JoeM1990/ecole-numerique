@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as e from 'express';
 import { AuthService } from 'src/domain/usecases/auth';
-import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
+import { UserLoginUseCase } from 'src/domain/usecases/user/user-login.usecase';
 import { ErrorComponent } from 'src/presentation/dialog/error/error.component';
 
 @Component({

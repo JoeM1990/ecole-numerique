@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ErrorComponent } from "src/presentation/dialog/error/error.component";
-import { UserLoginUseCase } from "./user-login.usecase";
+import { UserLoginUseCase } from "./user/user-login.usecase";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 

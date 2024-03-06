@@ -2,26 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRepository } from '../domain/repositories/user.repository';
-import { UserLoginUseCase } from '../domain/usecases/user-login.usecase';
-import { UserRegisterUseCase } from '../domain/usecases/user-register.usecase';
-import { GetUserProfileUseCase } from '../domain/usecases/get-user-profile.usecase';
+import { UserLoginUseCase } from '../domain/usecases/user/user-login.usecase';
+import { UserRegisterUseCase } from '../domain/usecases/user/user-register.usecase';
+import { GetUserProfileUseCase } from '../domain/usecases/user/get-user-profile.usecase';
 import { UserImplementationRepository } from './repositories/user/user-implementation.repository';
 import { EnseignantRepository } from 'src/domain/repositories/enseignant.repository';
-import { CreateEnseignantUseCase } from 'src/domain/usecases/create-enseignant.usecase';
+import { CreateEnseignantUseCase } from 'src/domain/usecases/enseignant/create-enseignant.usecase';
 import { EnseignantImplementationRepository } from './repositories/enseignant/enseignant-implementation.repository';
-import { ReadEnseignantUseCase } from 'src/domain/usecases/read-enseignant.usecase';
-import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/get-enseignant-byId.usecase';
+import { ReadEnseignantUseCase } from 'src/domain/usecases/enseignant/read-enseignant.usecase';
+import { ReadEnseignantByIdUseCase } from 'src/domain/usecases/enseignant/get-enseignant-byId.usecase';
 import { NgxSecureCookieService } from 'ngx-secure-cookie';
-import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/delete-enseignantById.usecase';
-import { UpdateEnseignantUseCase } from 'src/domain/usecases/update-enseignant.usecase';
+import { DeleteEnseignantByIdUseCase } from 'src/domain/usecases/enseignant/delete-enseignantById.usecase';
+import { UpdateEnseignantUseCase } from 'src/domain/usecases/enseignant/update-enseignant.usecase';
 import { PresenceRepository } from 'src/domain/repositories/presence.repository';
 import { PresenceImplementationRepository } from './repositories/presence/presence-implementation.repository';
-import { CreatePresenceUseCase } from 'src/domain/usecases/create-presence.usecase';
-import { ReadPresenceUseCase } from 'src/domain/usecases/read-presence.usecase';
-import { UpdatePresenceUseCase } from 'src/domain/usecases/update-presence.usecase';
-import { DeletePresenceByIdUseCase } from 'src/domain/usecases/delete-presenceById.usecase';
-import { ReadPresenceByIdUseCase } from 'src/domain/usecases/read-presenceById.usecase';
-import { ReadPresenceByNameUseCase } from 'src/domain/usecases/read-presenceByName.usecase';
+import { CreatePresenceUseCase } from 'src/domain/usecases/presence/create-presence.usecase';
+import { ReadPresenceUseCase } from 'src/domain/usecases/presence/read-presence.usecase';
+import { UpdatePresenceUseCase } from 'src/domain/usecases/presence/update-presence.usecase';
+import { DeletePresenceByIdUseCase } from 'src/domain/usecases/presence/delete-presenceById.usecase';
+import { ReadPresenceByIdUseCase } from 'src/domain/usecases/presence/read-presenceById.usecase';
+import { ReadPresenceByNameUseCase } from 'src/domain/usecases/presence/read-presenceByName.usecase';
 
 
 
@@ -145,6 +145,8 @@ const updatePresenceByIdUseCaseFactory =
         useFactory: updatePresenceByIdUseCaseFactory,
         deps: [PresenceRepository],
     };
+
+//for finance
 
 
 @NgModule({
