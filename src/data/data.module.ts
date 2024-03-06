@@ -22,6 +22,14 @@ import { UpdatePresenceUseCase } from 'src/domain/usecases/presence/update-prese
 import { DeletePresenceByIdUseCase } from 'src/domain/usecases/presence/delete-presenceById.usecase';
 import { ReadPresenceByIdUseCase } from 'src/domain/usecases/presence/read-presenceById.usecase';
 import { ReadPresenceByNameUseCase } from 'src/domain/usecases/presence/read-presenceByName.usecase';
+import { FinanceRepository } from 'src/domain/repositories/finance.repository';
+import { FinanceImplementationRepository } from './repositories/finance/finance-implementation.repository';
+import { CreateFinanceUseCase } from 'src/domain/usecases/finance/create-finance.usecase';
+import { UpdateFinanceUseCase } from 'src/domain/usecases/finance/update-finance.usecase';
+import { DeleteFinanceByIdUseCase } from 'src/domain/usecases/finance/delete-presenceById.usecase';
+import { ReadFinanceByNameUseCase } from 'src/domain/usecases/finance/read-financeByName.usecase';
+import { ReadFinanceUseCase } from 'src/domain/usecases/finance/read-finance.usecase';
+import { ReadFinanceByIdUseCase } from 'src/domain/usecases/finance/read-financeById.usecase';
 
 
 
@@ -147,7 +155,55 @@ const updatePresenceByIdUseCaseFactory =
     };
 
 //for finance
+const createFinanceUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new CreateFinanceUseCase(financeRepo);
+    export const createFinanceUseCaseProvider = {
+        provide: CreateFinanceUseCase,
+        useFactory: createFinanceUseCaseFactory,
+        deps: [FinanceRepository],
+    };
 
+const readFinanceUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new ReadFinanceUseCase(financeRepo);
+    export const readFinanceUseCaseProvider = {
+        provide: ReadFinanceUseCase,
+        useFactory: readFinanceUseCaseFactory,
+        deps: [FinanceRepository],
+    };
+
+const readFinanceByIdUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new ReadFinanceByIdUseCase(financeRepo);
+    export const readFinanceByIdUseCaseProvider = {
+        provide: ReadFinanceByIdUseCase,
+        useFactory: readFinanceByIdUseCaseFactory,
+        deps: [FinanceRepository],
+    };
+
+
+const readFinanceByNameUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new ReadFinanceByNameUseCase(financeRepo);
+    export const readFinanceByNameUseCaseProvider = {
+        provide: ReadFinanceByNameUseCase,
+        useFactory: readFinanceByNameUseCaseFactory,
+        deps: [FinanceRepository],
+    };
+
+const deleteFinanceByIdUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new DeleteFinanceByIdUseCase(financeRepo);
+    export const deleteFinanceByIdUseCaseProvider = {
+        provide: DeleteFinanceByIdUseCase,
+        useFactory: deleteFinanceByIdUseCaseFactory,
+        deps: [FinanceRepository],
+    };
+
+
+const updateFinanceByIdUseCaseFactory = 
+    (financeRepo: FinanceRepository) => new UpdateFinanceUseCase(financeRepo);
+    export const updateFinanceUseCaseProvider = {
+        provide: UpdateFinanceUseCase,
+        useFactory: updateFinanceByIdUseCaseFactory,
+        deps: [FinanceRepository],
+    };
 
 @NgModule({
     providers: [
@@ -165,9 +221,16 @@ const updatePresenceByIdUseCaseFactory =
         readPresenceByNameUseCaseProvider,
         updatePresenceUseCaseProvider,
         deletePresenceByIdUseCaseProvider,
+        createFinanceUseCaseProvider,
+        readFinanceUseCaseProvider,
+        readFinanceByIdUseCaseProvider,
+        readFinanceByNameUseCaseProvider,
+        updateFinanceUseCaseProvider,
+        deleteFinanceByIdUseCaseProvider,
         { provide: UserRepository, useClass: UserImplementationRepository },
-        { provide: EnseignantRepository, useClass:EnseignantImplementationRepository},
-        { provide: PresenceRepository, useClass:PresenceImplementationRepository}
+        { provide: EnseignantRepository, useClass: EnseignantImplementationRepository},
+        { provide: PresenceRepository, useClass: PresenceImplementationRepository},
+        { provide: FinanceRepository, useClass: FinanceImplementationRepository}
     ],
     imports: [
         CommonModule,
