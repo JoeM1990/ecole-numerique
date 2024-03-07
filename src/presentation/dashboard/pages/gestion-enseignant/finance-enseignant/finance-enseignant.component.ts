@@ -20,7 +20,7 @@ import { ConfirmationComponent } from 'src/presentation/dialog/confirmation/conf
 })
 export class FinanceEnseignantComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'noms', 'montant', 'motif', 'date', 'actions'];
+  displayedColumns: string[] = ['id', 'noms', 'montant', 'device', 'motif', 'date', 'actions'];
   dataSource!: MatTableDataSource<any>;
   
 
@@ -43,6 +43,7 @@ export class FinanceEnseignantComponent implements OnInit{
         id:null,
         noms: ['', [Validators.required], ],
         montant: ['', [Validators.required], ],
+        device: ['', [Validators.required], ],
         motif: ['', [Validators.required], ],
         date: ['', [Validators.required], ],
         categorie: 'enseignant'
@@ -52,6 +53,7 @@ export class FinanceEnseignantComponent implements OnInit{
         id:null,
         noms: ['', [Validators.required], ],
         montant: ['', [Validators.required], ],
+        device: ['', [Validators.required], ],
         motif: ['', [Validators.required], ],
         date: ['', [Validators.required], ],
         categorie: 'enseignant'
@@ -104,6 +106,7 @@ export class FinanceEnseignantComponent implements OnInit{
         id:res.id,
         noms: res.noms,
         montant: res.montant,
+        device: res.device,
         motif: res.motif,
         date: res.date,
         categorie: res.categorie

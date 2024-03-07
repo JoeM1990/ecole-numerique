@@ -134,6 +134,11 @@
                 <td mat-cell *matCellDef="let row"> {{row.montant}} </td>
               </ng-container>
 
+              <ng-container matColumnDef="device">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Device</th>
+                <td mat-cell *matCellDef="let row"> {{row.device}} </td>
+              </ng-container>
+
               <ng-container matColumnDef="motif">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Motif</th>
                 <td mat-cell *matCellDef="let row"> {{row.motif}} </td>
@@ -188,6 +193,13 @@
                       <input type="text" class="form-control"  formControlName="montant" required>
                     </div>
                     <div class="col-auto">
+                      <label class="col-form-label">Device</label>
+                      <select class="form-control"  formControlName="device">
+                        <option>USD</option>
+                        <option>CDF</option>
+                      </select>
+                    </div>
+                    <div class="col-auto">
                       <label class="col-form-label">Motif</label>
                       <input type="text" class="form-control"  formControlName="motif" required>
                     </div>
@@ -228,6 +240,13 @@
                     <div class="col-auto">
                       <label class="col-form-label">Montant</label>
                       <input type="text" class="form-control"  formControlName="montant" required>
+                    </div>
+                    <div class="col-auto">
+                      <label class="col-form-label">Device</label>
+                      <select class="form-control"  formControlName="device">
+                        <option>USD</option>
+                        <option>CDF</option>
+                      </select>
                     </div>
                     <div class="col-auto">
                       <label class="col-form-label">Motif</label>
